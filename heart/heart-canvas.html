@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+<body>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    html, body {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    img {
+        height: 100%;
+        width: 100%;
+        display: none;
+    }
+
+</style>
+<img id="img" src="http://productimg.yingtaoyun.com/dc/ea/dceae079e629fb7083b9db63bbaf4e1d.jpg" />
+<canvas id="canvas" width="0" height="0">
+    Your browser does not support the HTML5 canvas tag.
+</canvas>
+<script>
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+
+    canvas.height = window.innerHeight;
+
+    var p = new Path2D('M 105.85 51.5 Q 106.05 51.4 106.25 51.25 106 51.1 105.8 50.95 98.8 46.25 92.3 42.25 81.8 35.75 72.6 31.1 40.3 14.85 24.3 21.35 13.65 25.7 11.15 40.1 8.9 53.3 13.65 73.7 17.6 90.6 24.95 108.5 31.3 124.05 40.2 140.3 44.15 147.6 48.65 155.05 49.75 156.85 50.85 158.65 56.8 168.35 62.7 176.8 84.95 208.7 106.25 222.4 133.1 205.1 161.6 158.65 189.5 113.3 198.8 73.7 203.55 53.3 201.3 40.1 198.8 25.7 188.15 21.35 173.1 15.25 143.7 29.25 127.35 37 106.65 50.95 106.45 51.1 106.25 51.25 106.4 51.4 106.6 51.5 L 107.9 52.4 Q 110.05 53.9 112.3 55.45');
+
+    var img = document.getElementById("img");
+
+    img.onload = function(){
+
+        //ctx.drawImage(img,0,0,img.width,img.height,0,0,window.innerWidth,window.innerHeight);
+
+        //ctx.scale(2,2);
+
+        //ctx.stroke(p);
+
+        // Clip a rectangular area
+        ctx.fill(p);
+
+        ctx.clip();
+
+        ctx.drawImage(img,0,0,img.width,img.height,0,0,window.innerWidth,window.innerHeight);
+
+    }
+
+
+//    !function draw(){
+//
+//        window.requestAnimationFrame(draw);
+//    }();
+</script>
+</body>
+</html>
