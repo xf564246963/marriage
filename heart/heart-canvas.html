@@ -43,16 +43,11 @@
 
     img.onload = function(){
 
-        //ctx.drawImage(img,0,0,img.width,img.height,0,0,window.innerWidth,window.innerHeight);
+        ctx.scale(2,2);
 
-        //ctx.scale(2,2);
+        ctx.translate(0,100);
 
-        //ctx.stroke(p);
-
-        // Clip a rectangular area
-        ctx.fill(p);
-
-        ctx.clip();
+        ctx.clip(p);
 
         ctx.drawImage(img,0,0,img.width,img.height,0,0,window.innerWidth,window.innerHeight);
 
