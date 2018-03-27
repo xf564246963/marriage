@@ -28,14 +28,14 @@
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     var ctx = canvas.getContext('2d');
-    var offset = -99;
+    var offset = -100;
 
     function draw() {
         ctx.clearRect(0,0, canvas.width, canvas.height);
-        ctx.setLineDash([11,11,11,11,11,11,11,11,11,200]);
+        ctx.setLineDash([100,100]);
         ctx.lineDashOffset = offset;
-        ctx.moveTo(100, 0);
-        ctx.lineTo(100, 99);
+        ctx.moveTo(0, 100);
+        ctx.lineTo(100, 100);
         ctx.stroke();
         //ctx.strokeRect(10, 10, 100, 100);
     }
@@ -43,7 +43,7 @@
     function march() {
         offset++;
         if (offset > 99) {
-            offset = -99;
+            offset = -100;
         }
         draw();
         setTimeout(march, 20);

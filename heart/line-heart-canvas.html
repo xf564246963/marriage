@@ -33,7 +33,7 @@
     pathElement.setAttributeNS(null, 'd', path);
     const length = pathElement.getTotalLength();
     var ctx = canvas.getContext('2d');
-    var offset = -parseInt(length/2);
+    var offset = -parseInt(length/2);  //貌似是因为那个心形的起始点正好是心形一半长度的位置，要从一半的地方开始动就只用位移一半的长度
 
     function draw() {
         ctx.clearRect(0,0, canvas.width, canvas.height);
@@ -43,7 +43,7 @@
     }
 
     function march() {
-        console.log(offset)
+        //console.log(offset)
         offset++;
         if (offset > 0) {
             clearTimeout(timer);
