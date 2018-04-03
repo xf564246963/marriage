@@ -22,11 +22,26 @@
             display: none;
         }
 
+        .bg1{
+            background: url("./image/1.jpg");
+        }
+
+        .bg2{
+            background: url("./image/2.jpg");
+        }
+
+        .bg3{
+            background: url("./image/3.jpg");
+        }
+
     </style>
     <script src="./js/flowers.js"></script>
 </head>
-<body>
-    <canvas id="canvas">
+<body style="position: relative;">
+    <canvas id="canvas" style="position: absolute;top: 0;left:0;">
+         Your browser does not support the HTML5 canvas tag.
+    </canvas>
+    <canvas id="canvas2" style="position: absolute;top: 0;left:0;">
         Your browser does not support the HTML5 canvas tag.
     </canvas>
     <script>
@@ -179,14 +194,16 @@
 //                        imgCanvasCtx.save();
 //                    },500)
 
-                    var img = imgObjectList[0];
+                    var img = imgObjectList[2];
 
-                    document.querySelector("body").style.background = "url("+img_list[0]+") no-repeat "+img.imgClipData.x+"px "+img.imgClipData.y+"px/"+img.imgClipData.width+"px "+img.imgClipData.height+"px";
+                    document.querySelector("body").style.background = "url("+img_list[2]+") no-repeat "+img.imgClipData.x+"px "+img.imgClipData.y+"px/"+img.imgClipData.width+"px "+img.imgClipData.height+"px";
 
                     var timer = null;
 
 
                     requestAnimationFrame(function render(){
+
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
                         RENDERER.render();
 
@@ -194,20 +211,22 @@
 
                     });
 
-                    setInterval(function(){
-                        var img = imgObjectList[num];
-
-                        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                        //cancelAnimationFrame(timer);
-
-                        document.querySelector("body").style.background = "url("+img_list[num]+") no-repeat "+img.imgClipData.x+"px "+img.imgClipData.y+"px/"+img.imgClipData.width+"px "+img.imgClipData.height+"px";
-
-                        num++;
-                        if(num>=imgListLen){
-                            num = 0;
-                        }
-                    },3000);
+//                    setInterval(function(){
+//                        var img = imgObjectList[num];
+//
+//                        //ctx.clearRect(0, 0, canvas.width, canvas.height);
+//
+//                        //cancelAnimationFrame(timer);
+//
+//                        requestAnimationFrame(function(){
+//                            document.querySelector("body").style.background = "url("+img_list[num]+") no-repeat "+img.imgClipData.x+"px "+img.imgClipData.y+"px/"+img.imgClipData.width+"px "+img.imgClipData.height+"px";
+//                        })
+//
+//                        num++;
+//                        if(num>=imgListLen){
+//                            num = 0;
+//                        }
+//                    },5000);
 
 
                 }

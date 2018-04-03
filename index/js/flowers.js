@@ -34,7 +34,7 @@ var RENDERER = {
     },
     render : function(img1){
         //requestAnimationFrame(this.render);
-        this.context.clearRect(0, 0, this.width, this.height);
+        //this.context.clearRect(0, 0, this.width, this.height);
         this.cherries.sort(function(cherry1, cherry2){
             return cherry1.z - cherry2.z;
         });
@@ -56,7 +56,7 @@ var CHERRY_BLOSSOM = function(renderer, isRandom){
 CHERRY_BLOSSOM.prototype = {
     FOCUS_POSITION : 300,
     FAR_LIMIT : 600,
-    MAX_RIPPLE_COUNT : 10,
+    MAX_RIPPLE_COUNT : 100,
     RIPPLE_RADIUS : 100,
     SURFACE_RATE : 0.5,
     SINK_OFFSET : 20,
@@ -66,7 +66,7 @@ CHERRY_BLOSSOM.prototype = {
         this.y = isRandom ? this.getRandomValue(0, this.renderer.height) : this.renderer.height * 1.5;
         this.z = this.getRandomValue(0, this.FAR_LIMIT);
         this.vx = this.getRandomValue(-2, 2);
-        this.vy = -5;
+        this.vy = -10;
         this.theta = this.getRandomValue(0, Math.PI * 2);
         this.phi = this.getRandomValue(0, Math.PI * 2);
         this.psi = 0;
