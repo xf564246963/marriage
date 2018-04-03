@@ -3,7 +3,7 @@
  */
 var RENDERER = {
     INIT_CHERRY_BLOSSOM_COUNT : 30,
-    MAX_ADDING_INTERVAL : 10,
+    MAX_ADDING_INTERVAL : 5,
 
     init : function(canvas,ctx){
         this.setParameters(canvas,ctx);
@@ -18,7 +18,7 @@ var RENDERER = {
         //this.$container = $('#jsi-cherry-container');
         this.canvas = canvas;
         this.width = canvas.width;
-        this.height = parseInt(canvas.height*5/4);
+        this.height = parseInt(canvas.height);
         this.context = ctx;
         this.cherries = [];
         this.maxAddingInterval = Math.round(this.MAX_ADDING_INTERVAL * 1000 / this.width);
@@ -39,7 +39,7 @@ var RENDERER = {
             return cherry1.z - cherry2.z;
         });
         for(var i = this.cherries.length - 1; i >= 0; i--){
-            if(!this.cherries[i].render(this.context)){
+            if(!this.cherries[i].render(this.context) || this.cherries[i].y < - window.innerHeight / 2 - 20){
                 this.cherries.splice(i, 1);
             }
         }
@@ -80,7 +80,7 @@ CHERRY_BLOSSOM.prototype = {
             theta = this.theta + Math.ceil(-(this.y + this.renderer.height * this.SURFACE_RATE) / this.vy) * Math.PI / 500;
         theta %= Math.PI * 2;
 
-        this.offsetY = 40 * ((theta <= Math.PI / 2 || theta >= Math.PI * 3 / 2) ? -1 : 1);
+        this.offsetY = 20 * ((theta <= Math.PI / 2 || theta >= Math.PI * 3 / 2) ? -1 : 1);
         this.thresholdY = this.renderer.height / 2 + this.renderer.height * this.SURFACE_RATE * axis.rate;
         this.entityColor = this.renderer.context.createRadialGradient(0, 40, 0, 0, 40, 80);
         this.entityColor.addColorStop(0, 'hsl(330, 70%, ' + 50 * (0.3 + axis.rate) + '%)');
@@ -97,7 +97,7 @@ CHERRY_BLOSSOM.prototype = {
     getAxis : function(){
         var rate = this.FOCUS_POSITION / (this.z + this.FOCUS_POSITION),
             x = this.renderer.width / 2 + this.x * rate,
-            y = this.renderer.height / 2 - this.y * rate;
+            y = this.renderer.height * 3 / 4 - this.y * rate;
         return {rate : rate, x : x, y : y};
     },
     renderCherry : function(context, axis){
