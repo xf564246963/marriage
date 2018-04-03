@@ -29,9 +29,9 @@
         flowerColor = "rgba(255,192,203,.3)", //花色
         flowerColorDeep = "rgba(241,158,194,.5)", //花色深
         fallList = [], //飘落樱花列表
-        g = 0.01, //重力加速度
+        g = 0.5, //重力加速度
         gWind = 0.005, //风力加速度
-        limitSpeedY = 1, //Y速度上限
+        limitSpeedY = 2, //Y速度上限
         limitSpeedX = 1; //X速度上限
     fCtx.shadowColor= "#FFF" ;
     fCtx.shadowBlur = 10 ;
@@ -45,7 +45,7 @@
         flowerList.push({
           x: x,
           y: y,
-          sx: Math.random() - 0.5,
+          sx: Math.random() - 0.99,
           sy: 0,
           color: color,
           r: r,
@@ -89,7 +89,7 @@
       }
       requestAnimationFrame(update);
     }
-    drawTree(0, 200, -Math.PI/2, 30);//执行
+    drawTree(100, 200, -Math.PI/2, 30);//执行
     update();
   </script>
 </body>
