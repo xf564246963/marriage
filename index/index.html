@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        img {
+            height: 100%;
+            width: 100%;
+            display: none;
+        }
+
+    </style>
+    <script src="./js/flowers.js"></script>
+</head>
+<body>
+    <canvas id="canvas">
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>
+    <script>
+        var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+                window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+
+        var cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
+
+        var img_list = [];
+        for(var i = 1; i <= 12; i++ ){
+            img_list.push(i);
+        }
+        var imgListLen = img_list.length;
+
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
+
+        var scale = 1;
+
+        canvas.width = window.innerWidth;
+
+        canvas.height = window.innerHeight;
+
+//        function imgLoad(src){
+//            if(!src){
+//                console.log("图片地址不能为空！");
+//                return false;
+//            }
+//
+//            if(src.indexOf("/")<0){
+//                //是否为相对路径
+//                src = "./image/" + src;
+//            }
+//
+//            var img = new Image();
+//
+//            img.src = src;
+//
+//            return img;
+//        }
+
+        function imgResponse(imgArr){
+            for(var i = 0; i <= imgListLen; i++ ){
+                if(Object.prototype.toString.call(imgArr[i])==="[object Object]"){
+                    var img = imgArr[i].imageObject;
+                    imgArr[i].imgClipData = {};
+                    //canvas drawImage自适应
+//                    if(img.width/img.height>=window.innerWidth/window.innerHeight){
+//                        imgArr[i].imgClipData.width = parseInt(img.height*window.innerWidth/window.innerHeight);
+//                        imgArr[i].imgClipData.height = img.height;
+//                        imgArr[i].imgClipData.x = (img.width-imgArr[i].imgClipData.width)/2;
+//                        imgArr[i].imgClipData.y = 0;
+//                    }else{
+//                        imgArr[i].imgClipData.width = img.width;
+//                        imgArr[i].imgClipData.height = parseInt(img.width/window.innerWidth*window.innerHeight);
+//                        imgArr[i].imgClipData.x = 0;
+//                        imgArr[i].imgClipData.y = (img.height-imgArr[i].imgClipData.height)/2;
+//                    }
+
+                    //canvas background 自适应
+                    if(img.width/img.height>=window.innerWidth/window.innerHeight){
+                        imgArr[i].imgClipData.width = parseInt(window.innerHeight*img.width/img.height);
+                        imgArr[i].imgClipData.height = window.innerHeight;
+                        imgArr[i].imgClipData.x = -(imgArr[i].imgClipData.width-window.innerWidth)/2;
+                        imgArr[i].imgClipData.y = 0;
+                    }else{
+                        imgArr[i].imgClipData.width = window.innerWidth;
+                        imgArr[i].imgClipData.height = parseInt(window.innerWidth*img.height/img.width);
+                        imgArr[i].imgClipData.x = 0;
+                        imgArr[i].imgClipData.y = -(imgArr[i].imgClipData.height-window.innerHeight)/2;
+                    }
+                }
+            }
+
+        }
+
+        function loadImg(imgArr, callback){
+            var len=imgArr.length;
+            if(len<=0)return callback(1,[]);
+            var loaded=0;var imgList=[];
+            var loadFun=function(evt){
+                var type={
+                    "load": 1,
+                    "error": 2
+                }[evt.type];
+                if(type === 1){
+                    if(loaded<len){
+                        ++loaded;
+                        callback(loaded/len,imgList);
+                    }
+                }else{
+                    this.src = this.src;
+                }
+            };
+            for (var i = 0; i < len; i++) {
+                imgList[i] = {};
+                imgList[i].imageObject = new Image;
+                imgList[i].imageObject.onload = function () {
+                    loadFun.call(this, {
+                        type: "load"
+                    })
+                };
+                imgList[i].imageObject.onerror = function () {
+                    loadFun.call(this, {
+                        type: "error"
+                    })
+                };
+                imgList[i].imageObject.src = imgArr[i];
+            }
+        };
+
+        document.addEventListener("DOMContentLoaded",function(){
+
+            for(var j=0; j<imgListLen; j++){
+                img_list[j] = './image/'+img_list[j]+".jpg";
+            }
+
+            loadImg(img_list,function (o, imgObjectList) {
+                if(o === 1){
+
+
+                    imgResponse(imgObjectList);
+
+                    var num = 1;
+
+                    var imgCanvas = document.createElement("canvas");
+                    imgCanvas.width = window.innerWidth;
+                    imgCanvas.height = window.innerHeight;
+                    var imgCanvasCtx = imgCanvas.getContext("2d");
+
+                    imgCanvasCtx.save();
+
+                    RENDERER.init(canvas,ctx);
+
+
+                    //page1
+//                    setInterval(function(){
+//                        var img1 = imgObjectList[num];
+//
+//                        imgCanvasCtx.clearRect(0,0,window.innerWidth,window.innerHeight); // clear canvas
+//                        imgCanvasCtx.drawImage(img1.imageObject, img1.imgClipData.x,
+//                                img1.imgClipData.y, img1.imgClipData.width,
+//                                img1.imgClipData.height, 0, 0, window.innerWidth, window.innerHeight);
+//                        ctx.drawImage(imgCanvas,0,0);
+//                        num++;
+//                        if(num>=imgListLen){
+//                            num = 0;
+//                        }
+//                        imgCanvasCtx.restore();
+//                        imgCanvasCtx.save();
+//                    },500)
+
+                    var img = imgObjectList[0];
+
+                    document.querySelector("body").style.background = "url("+img_list[0]+") no-repeat "+img.imgClipData.x+"px "+img.imgClipData.y+"px/"+img.imgClipData.width+"px "+img.imgClipData.height+"px";
+
+                    var timer = null;
+
+
+                    requestAnimationFrame(function render(){
+
+                        RENDERER.render();
+
+                        timer = requestAnimationFrame(render);
+
+                    });
+
+                    setInterval(function(){
+                        var img = imgObjectList[num];
+
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                        //cancelAnimationFrame(timer);
+
+                        document.querySelector("body").style.background = "url("+img_list[num]+") no-repeat "+img.imgClipData.x+"px "+img.imgClipData.y+"px/"+img.imgClipData.width+"px "+img.imgClipData.height+"px";
+
+                        num++;
+                        if(num>=imgListLen){
+                            num = 0;
+                        }
+                    },3000);
+
+
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>
