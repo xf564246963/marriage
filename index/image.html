@@ -282,7 +282,7 @@
                 this.setBg(1);
                 var tween = new TWEEN.Tween(scale)
                         .to({ x:0, y:0 }, 3000)
-                        .easing(TWEEN.Easing.Linear.None)
+                        .easing(TWEEN.Easing.Quadratic.InOut)
                         .onUpdate(function(scale) {
                             Transform.scale(scale.x,scale.y);
                             imageDrawerArr[0].draw();
