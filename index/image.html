@@ -97,7 +97,31 @@
 //                    }
                 }
             }
+        }
 
+        function imgResponseAsBg(imgArr){
+            var bgArr = [];
+            for(var i = 0; i <= imgListLen; i++ ){
+                if(Object.prototype.toString.call(imgArr[i])==="[object Object]"){
+                    var img = imgArr[i].imageObject;
+                    bgArr[i] = {};
+                    bgArr[i].imageObject = img;
+                    bgArr[i].imgClipData = {};
+                    //canvas background 自适应
+                    if(img.width/img.height>=window.innerWidth/window.innerHeight){
+                        bgArr[i].imgClipData.width = parseInt(window.innerHeight*img.width/img.height);
+                        bgArr[i].imgClipData.height = window.innerHeight;
+                        bgArr[i].imgClipData.x = -(bgArr[i].imgClipData.width-window.innerWidth)/2;
+                        bgArr[i].imgClipData.y = 0;
+                    }else{
+                        bgArr[i].imgClipData.width = window.innerWidth;
+                        bgArr[i].imgClipData.height = parseInt(window.innerWidth*img.height/img.width);
+                        bgArr[i].imgClipData.x = 0;
+                        bgArr[i].imgClipData.y = -(bgArr[i].imgClipData.height-window.innerHeight)/2;
+                    }
+                }
+            }
+            return bgArr;
         }
 
         function loadImg(imgArr, callback){
@@ -135,7 +159,7 @@
             }
         };
 
-        var imageDrawerArr = [];
+        var imageDrawerArr = [],bgArr;
         var timer = null;
 
         document.addEventListener("DOMContentLoaded",function(){
@@ -149,6 +173,7 @@
 
 
                     imgResponse(imgObjectList);
+                    bgArr = imgResponseAsBg(imgObjectList);
 
                     Transform.init(ctx);
                     pageManage.init(ctx);
@@ -182,8 +207,6 @@
                         timer = requestAnimationFrame(animate);
                         ctx.save();
                         ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
-                        ctx.scale(1,1);
-                        ctx.drawImage(imageDrawerArr[1].drawInOffsetCanvas(),0,0);
                         TWEEN.update(time);
                         ctx.restore();
                     }
@@ -256,6 +279,7 @@
         var pageManage = {
             "0":function(){
                 var scale = { x:1, y:1 };
+                this.setBg(1);
                 var tween = new TWEEN.Tween(scale)
                         .to({ x:0, y:0 }, 3000)
                         .easing(TWEEN.Easing.Linear.None)
@@ -267,6 +291,11 @@
                             cancelAnimationFrame(timer);
                         })
                         .start();
+            },
+            setBg:function(index){
+                document.querySelector("body").style.background = "url("+img_list[index]+") no-repeat "
+                        +bgArr[index].imgClipData.x+"px "+bgArr[index].imgClipData.y +"px/"
+                        +bgArr[index].imgClipData.width+"px " +bgArr[index].imgClipData.height+"px";
             },
             init:function(context){
                 this.context = context;
