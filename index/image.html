@@ -279,9 +279,12 @@
             if(this.pageData[this.flowerPage].startTime != null && endTime - this.pageData[this.flowerPage].startTime > 5000){
                 this.animateStop();
                 this.startTime = null;
-                this.animateInit(0);
+                this.animateInit(this.pageIndex+1);
                 RENDERER.init(canvas,ctx);
             }
+        },
+        "4":function(){
+
         },
         pageData:{
             "0":{
@@ -299,6 +302,7 @@
         },
         timer:null,
         flowerPage:3,
+        maxPageIndex:4,
         pageIndex:0,
         animate:function(){
             this.timer = requestAnimationFrame(this.animate.bind(this));
@@ -317,7 +321,7 @@
             imageDrawerArr[this.pageIndex].draw();
             if(bgIndex === undefined || bgIndex === null){
                 bgIndex = this.pageIndex + 1;
-                if(bgIndex>3){
+                if(bgIndex>this.maxPageIndex){
                     bgIndex = 0
                 }
             }
