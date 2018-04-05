@@ -2,7 +2,7 @@
  * Created by xiongfeng on 2018/4/5.
  */
 var StarRain = {
-    init : function(context){
+    init : function(context,clear){
         this.context = context;
         this.rains = new Array();
         this.rainCount = 10;
@@ -10,7 +10,6 @@ var StarRain = {
         for (var i=0;i<this.rainCount;i++) {
             var rain = new MeteorRain();
             rain.init();
-            rain.draw();
             this.rains.push(rain);
         }
     },
@@ -18,13 +17,13 @@ var StarRain = {
         for (var n = 0; n < this.rainCount; n++){
             var rain = this.rains[n];
             rain.move();
+            rain.draw();
             if(rain.y>window.innerHeight){
                 this.context.clearRect(rain.x,rain.y-rain.height,rain.width,rain.height);
                 this.rains[n] = new MeteorRain();
                 this.rains[n].init();
             }
         }
-
     }
 };
 
@@ -41,8 +40,8 @@ var MeteorRain = function(){
     this.offset_x = -1;//横轴移动偏移量
     this.offset_y = -1;//纵轴移动偏移量
     this.alpha = 1; //透明度
-    this.color1 = "";//流星的色彩
-    this.color2 = "";  //流星的色彩
+    this.color1 = "rgba(255,255,255,1)";//流星的色彩
+    this.color2 = "transparent";  //流星的色彩
     /****************初始化函数********************/
     this.init = function () //初始化
     {
@@ -129,7 +128,7 @@ var MeteorRain = function(){
         //透明度增加
         this.alpha -= 0.002;
         //重绘
-        this.draw();
+        //this.draw();
     }
 
 };

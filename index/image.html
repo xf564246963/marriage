@@ -27,6 +27,7 @@
     <script src="./js/flowers.js"></script>
     <script src="./js/fireworks.js"></script>
     <script src="./js/star.js"></script>
+    <script src="./js/heart.js"></script>
 </head>
 <body>
 <div id="container">
@@ -174,6 +175,7 @@
                 FLOWERS.init(canvas, ctx);
                 FIREWORKS.init(canvas, ctx);
                 StarRain.init(ctx);
+                HEARTS.init(ctx);
 
 
                 var num = 1;
@@ -275,7 +277,7 @@
             if (this.pageData[this.pageIndex].y >= window.innerHeight) {
                 this.animateStop();
                 this.pageData[this.pageIndex].y = 0;
-                this.animateInit(this.pageIndex + 1, this.flowerPage);
+                this.animateInit(this.pageIndex + 1, 3);
                 this.pageData[this.flowerPage].startTime = new Date().getTime();
             }
         },
@@ -285,7 +287,7 @@
             if (this.pageData[this.flowerPage].startTime != null && endTime - this.pageData[this.flowerPage].startTime > 5500) {
                 this.animateStop();
                 this.pageData[this.flowerPage].startTime = null;
-                this.animateInit(this.pageIndex + 1,4);
+                this.animateInit(this.pageIndex + 1, 4);
                 FLOWERS.init(canvas, ctx);
                 this.pageData[this.fireworkPage].startTime = new Date().getTime();
             }
@@ -296,18 +298,31 @@
             if (this.pageData[this.fireworkPage].startTime != null && endTime - this.pageData[this.fireworkPage].startTime > 5500) {
                 this.animateStop();
                 this.pageData[this.fireworkPage].startTime = null;
-                this.animateInit(this.pageIndex + 1,5);
+                this.animateInit(this.pageIndex + 1, 5);
                 FIREWORKS.init(canvas, ctx);
+                this.pageData[this.starRainPage].startTime = new Date().getTime();
             }
         },
         "5": function () {
             StarRain.render();
-//            if (this.pageData[this.starRainPage].startTime != null && endTime - this.pageData[this.starRainPage].startTime > 5500) {
-//                this.animateStop();
-//                this.pageData[this.starRainPage].startTime = null;
-//                this.animateInit(this.pageIndex + 1,6);
-//                StarRain.init(canvas, ctx);
-//            }
+            var endTime = new Date().getTime();
+            if (this.pageData[this.starRainPage].startTime != null && endTime - this.pageData[this.starRainPage].startTime > 5500) {
+                this.animateStop();
+                this.pageData[this.starRainPage].startTime = null;
+                this.animateInit(this.pageIndex + 1, 6);
+                StarRain.init(ctx,true);
+                this.pageData[this.heartsPage].startTime = new Date().getTime();
+            }
+        },
+        "6": function () {
+            HEARTS.render();
+            var endTime = new Date().getTime();
+            if (this.pageData[this.heartsPage].startTime != null && endTime - this.pageData[this.heartsPage].startTime > 5500) {
+                this.animateStop();
+                this.pageData[this.heartsPage].startTime = null;
+                this.animateInit(this.pageIndex + 1);
+                HEARTS.init(ctx);
+            }
         },
         pageData: {
             "0": {
@@ -324,12 +339,20 @@
             },
             "4": {
                 startTime: null
+            },
+            "5": {
+                startTime: null
+            },
+            "6": {
+                startTime: null
             }
         },
         timer: null,
         flowerPage: 3,
         fireworkPage: 4,
-        maxPageIndex: 5,
+        starRainPage: 5,
+        heartsPage:6,
+        maxPageIndex: 6,
         pageIndex: 0,
         animate: function () {
             this.timer = requestAnimationFrame(this.animate.bind(this));
@@ -343,6 +366,9 @@
                 this.pageIndex++;
             } else {
                 this.pageIndex = index;
+            }
+            if(this.pageIndex>this.maxPageIndex){
+                this.pageIndex = 0;
             }
             this.restore();
             imageDrawerArr[this.pageIndex].draw();
