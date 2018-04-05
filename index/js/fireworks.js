@@ -4,7 +4,8 @@
 var FIREWORKS = {
     sparks: [],
     fireworks: [],
-    init: function (context) {
+    init: function (canvas, context) {
+        this.canvas = canvas;
         this.context = context;
         var i = 20;
         while (i--) {
@@ -13,13 +14,13 @@ var FIREWORKS = {
             )
         }
     },
-    render:function(){
+    render: function () {
 
         this.context.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
         this.fireworks.forEach(function (firework, index) {
             if (firework.dead) {
-                this.fireworks.splice(index, 1);
+                FIREWORKS.fireworks.splice(index, 1);
                 return false;
             }
             firework.move()
@@ -28,7 +29,7 @@ var FIREWORKS = {
 
         this.sparks.forEach(function (spark, index) {
             if (spark.dead) {
-                this.sparks.splice(index, 1);
+                FIREWORKS.sparks.splice(index, 1);
                 return false;
             }
             spark.move()
@@ -36,8 +37,13 @@ var FIREWORKS = {
         })
 
         if (Math.random() < 0.05) {
-            this.fireworks.push(new Firework())
+            FIREWORKS.fireworks.push(new Firework())
         }
+    },
+    drawCircle: function (x, y, radius, color) {
+        color = color || '#FFF'
+        this.context.fillStyle = color
+        this.context.fillRect(x - radius / 2, y - radius / 2, radius, radius)
     }
 }
 
@@ -65,15 +71,15 @@ function Spark(x, y, color) {
 
     }
     this.draw = function () {
-        drawCircle(this.x, this.y, 3, this.color)
+        FIREWORKS.drawCircle(this.x, this.y, 3, this.color)
     }
 }
 
 function Firework(x, y) {
     this.xmove = new Walker({radius: 10, speed: 0.5})
-    this.x = x || Math.random() * this.context.canvas.width
-    this.y = y || this.context.canvas.height
-    this.height = Math.random() * this.context.canvas.height / 3;
+    this.x = x || Math.random() * FIREWORKS.canvas.width;
+    this.y = y || FIREWORKS.canvas.height;
+    this.height = Math.random() * FIREWORKS.canvas.height / 3;
     this.dead = false
     this.color = randomColor()
 
@@ -84,19 +90,13 @@ function Firework(x, y) {
 
     }
     this.draw = function () {
-        //drawCircle(this.x, this.y, 1, this.color)
+        //FIREWORKS.drawCircle(this.x, this.y, 1, this.color)
     }
     this.burst = function () {
         this.dead = true
         var i = 100;
-        while (i--) this.sparks.push(new Spark(this.x, this.y, this.color))
+        while (i--) FIREWORKS.sparks.push(new Spark(this.x, this.y, this.color))
     }
-}
-
-function drawCircle(x, y, radius, color) {
-    color = color || '#FFF'
-    this.context.fillStyle = color
-    this.context.fillRect(x - radius / 2, y - radius / 2, radius, radius)
 }
 
 function randomColor() {

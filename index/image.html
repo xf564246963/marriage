@@ -25,6 +25,7 @@
     </style>
     <script src="./js/Tween.js"></script>
     <script src="./js/flowers.js"></script>
+    <script src="./js/fireworks.js"></script>
 </head>
 <body>
 <div id="container">
@@ -39,7 +40,7 @@
     var cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
 
     var img_list = [];
-    for(var i = 1; i <= 5; i++ ){
+    for (var i = 1; i <= 5; i++) {
         img_list.push(i);
     }
     var imgListLen = img_list.length;
@@ -56,22 +57,22 @@
     offsetCanvas.width = window.innerWidth;
     offsetCanvas.height = window.innerHeight;
 
-    function imgResponse(imgArr){
-        for(var i = 0; i <= imgListLen; i++ ){
-            if(Object.prototype.toString.call(imgArr[i])==="[object Object]"){
+    function imgResponse(imgArr) {
+        for (var i = 0; i <= imgListLen; i++) {
+            if (Object.prototype.toString.call(imgArr[i]) === "[object Object]") {
                 var img = imgArr[i].imageObject;
                 imgArr[i].imgClipData = {};
                 //canvas drawImage自适应
-                if(img.width/img.height>=window.innerWidth/window.innerHeight){
-                    imgArr[i].imgClipData.width = parseInt(img.height*window.innerWidth/window.innerHeight);
+                if (img.width / img.height >= window.innerWidth / window.innerHeight) {
+                    imgArr[i].imgClipData.width = parseInt(img.height * window.innerWidth / window.innerHeight);
                     imgArr[i].imgClipData.height = img.height;
-                    imgArr[i].imgClipData.x = (img.width-imgArr[i].imgClipData.width)/2;
+                    imgArr[i].imgClipData.x = (img.width - imgArr[i].imgClipData.width) / 2;
                     imgArr[i].imgClipData.y = 0;
-                }else{
+                } else {
                     imgArr[i].imgClipData.width = img.width;
-                    imgArr[i].imgClipData.height = parseInt(img.width/window.innerWidth*window.innerHeight);
+                    imgArr[i].imgClipData.height = parseInt(img.width / window.innerWidth * window.innerHeight);
                     imgArr[i].imgClipData.x = 0;
-                    imgArr[i].imgClipData.y = (img.height-imgArr[i].imgClipData.height)/2;
+                    imgArr[i].imgClipData.y = (img.height - imgArr[i].imgClipData.height) / 2;
                 }
 
                 //canvas background 自适应
@@ -90,46 +91,47 @@
         }
     }
 
-    function imgResponseAsBg(imgArr){
+    function imgResponseAsBg(imgArr) {
         var bgArr = [];
-        for(var i = 0; i <= imgListLen; i++ ){
-            if(Object.prototype.toString.call(imgArr[i])==="[object Object]"){
+        for (var i = 0; i <= imgListLen; i++) {
+            if (Object.prototype.toString.call(imgArr[i]) === "[object Object]") {
                 var img = imgArr[i].imageObject;
                 bgArr[i] = {};
                 bgArr[i].imageObject = img;
                 bgArr[i].imgClipData = {};
                 //canvas background 自适应
-                if(img.width/img.height>=window.innerWidth/window.innerHeight){
-                    bgArr[i].imgClipData.width = parseInt(window.innerHeight*img.width/img.height);
+                if (img.width / img.height >= window.innerWidth / window.innerHeight) {
+                    bgArr[i].imgClipData.width = parseInt(window.innerHeight * img.width / img.height);
                     bgArr[i].imgClipData.height = window.innerHeight;
-                    bgArr[i].imgClipData.x = -(bgArr[i].imgClipData.width-window.innerWidth)/2;
+                    bgArr[i].imgClipData.x = -(bgArr[i].imgClipData.width - window.innerWidth) / 2;
                     bgArr[i].imgClipData.y = 0;
-                }else{
+                } else {
                     bgArr[i].imgClipData.width = window.innerWidth;
-                    bgArr[i].imgClipData.height = parseInt(window.innerWidth*img.height/img.width);
+                    bgArr[i].imgClipData.height = parseInt(window.innerWidth * img.height / img.width);
                     bgArr[i].imgClipData.x = 0;
-                    bgArr[i].imgClipData.y = -(bgArr[i].imgClipData.height-window.innerHeight)/2;
+                    bgArr[i].imgClipData.y = -(bgArr[i].imgClipData.height - window.innerHeight) / 2;
                 }
             }
         }
         return bgArr;
     }
 
-    function loadImg(imgArr, callback){
-        var len=imgArr.length;
-        if(len<=0)return callback(1,[]);
-        var loaded=0;var imgList=[];
-        var loadFun=function(evt){
-            var type={
+    function loadImg(imgArr, callback) {
+        var len = imgArr.length;
+        if (len <= 0)return callback(1, []);
+        var loaded = 0;
+        var imgList = [];
+        var loadFun = function (evt) {
+            var type = {
                 "load": 1,
                 "error": 2
             }[evt.type];
-            if(type === 1){
-                if(loaded<len){
+            if (type === 1) {
+                if (loaded < len) {
                     ++loaded;
-                    callback(loaded/len,imgList);
+                    callback(loaded / len, imgList);
                 }
-            }else{
+            } else {
                 this.src = this.src;
             }
         };
@@ -148,18 +150,19 @@
             };
             imgList[i].imageObject.src = imgArr[i];
         }
-    };
+    }
+    ;
 
-    var imageDrawerArr = [],bgArr;
+    var imageDrawerArr = [], bgArr;
 
-    document.addEventListener("DOMContentLoaded",function(){
+    document.addEventListener("DOMContentLoaded", function () {
 
-        for(var j=0; j<imgListLen; j++){
-            img_list[j] = './image/'+img_list[j]+".jpg";
+        for (var j = 0; j < imgListLen; j++) {
+            img_list[j] = './image/' + img_list[j] + ".jpg";
         }
 
-        loadImg(img_list,function (o, imgObjectList) {
-            if(o === 1){
+        loadImg(img_list, function (o, imgObjectList) {
+            if (o === 1) {
 
 
                 imgResponse(imgObjectList);
@@ -167,13 +170,15 @@
 
                 Transform.init(ctx);
                 pageManage.init(ctx);
-                RENDERER.init(canvas,ctx);
+                FLOWERS.init(canvas, ctx);
+                FIREWORKS.init(canvas, ctx);
+
 
                 var num = 1;
 
-                for(var i = 0; i < imgObjectList.length; i++){
+                for (var i = 0; i < imgObjectList.length; i++) {
                     var img = imgObjectList[i];
-                    imageDrawerArr.push(new ImageDrawer(img.imageObject,img.imgClipData, ctx));
+                    imageDrawerArr.push(new ImageDrawer(img.imageObject, img.imgClipData, ctx));
                 }
 
                 pageManage.animateInit(0);
@@ -184,23 +189,22 @@
     })
 
 
-
     //图像实例
-    function ImageDrawer(imageObject,imgClipData,context){
+    function ImageDrawer(imageObject, imgClipData, context) {
         this.context = context;
         this.imageObject = imageObject;
         this.imgClipData = imgClipData;
     }
     ImageDrawer.prototype = {
-        setParam:function(){
+        setParam: function () {
 
         },
-        draw:function(){
+        draw: function () {
             this.context.drawImage(this.imageObject, this.imgClipData.x,
                     this.imgClipData.y, this.imgClipData.width,
                     this.imgClipData.height, 0, 0, window.innerWidth, window.innerHeight);
         },
-        drawInOffsetCanvas:function(){
+        drawInOffsetCanvas: function () {
             offsetCanvasCtx.drawImage(this.imageObject, this.imgClipData.x,
                     this.imgClipData.y, this.imgClipData.width,
                     this.imgClipData.height, 0, 0, window.innerWidth, window.innerHeight);
@@ -211,7 +215,7 @@
 
     //变形方法
     var Transform = {
-        init:function(context){
+        init: function (context) {
             this.context = context;
         },
         translate: function (x, y) {
@@ -241,107 +245,107 @@
 
     var pageManage = {
         //每页动画处理逻辑
-        "0":function(){
+        "0": function () {
             this.pageData[this.pageIndex].scale.x = this.pageData[this.pageIndex].scale.x - 0.01;
             this.pageData[this.pageIndex].scale.y = this.pageData[this.pageIndex].scale.y - 0.01;
-            Transform.scale(this.pageData[this.pageIndex].scale.x,this.pageData[this.pageIndex].scale.y);
+            Transform.scale(this.pageData[this.pageIndex].scale.x, this.pageData[this.pageIndex].scale.y);
             imageDrawerArr[this.pageIndex].draw();
-            if(this.pageData[this.pageIndex].scale.x<=0 || this.pageData[this.pageIndex].scale.y<=0){
+            if (this.pageData[this.pageIndex].scale.x <= 0 || this.pageData[this.pageIndex].scale.y <= 0) {
                 this.animateStop();
-                this.pageData[this.pageIndex].scale = { x:1, y:1 };
-                this.animateInit(this.pageIndex+1);
+                this.pageData[this.pageIndex].scale = {x: 1, y: 1};
+                this.animateInit(this.pageIndex + 1);
             }
         },
-        "1":function(){
-            this.pageData[this.pageIndex].x+=4;
-            Transform.translate(this.pageData[this.pageIndex].x,0);
+        "1": function () {
+            this.pageData[this.pageIndex].x += 4;
+            Transform.translate(this.pageData[this.pageIndex].x, 0);
             imageDrawerArr[this.pageIndex].draw();
-            if(this.pageData[this.pageIndex].x>=window.innerWidth){
+            if (this.pageData[this.pageIndex].x >= window.innerWidth) {
                 this.animateStop();
                 this.pageData[this.pageIndex].x = 0;
-                this.animateInit(this.pageIndex+1);
+                this.animateInit(this.pageIndex + 1);
             }
         },
-        "2":function(){
-            this.pageData[this.pageIndex].y+=8;
-            Transform.translate(0,this.pageData[this.pageIndex].y);
+        "2": function () {
+            this.pageData[this.pageIndex].y += 8;
+            Transform.translate(0, this.pageData[this.pageIndex].y);
             imageDrawerArr[this.pageIndex].draw();
-            if(this.pageData[this.pageIndex].y>=window.innerHeight){
+            if (this.pageData[this.pageIndex].y >= window.innerHeight) {
                 this.animateStop();
-                this.pageData[this.pageIndex].y=0;
-                this.animateInit(this.pageIndex+1,this.flowerPage);
+                this.pageData[this.pageIndex].y = 0;
+                this.animateInit(this.pageIndex + 1, this.flowerPage);
                 this.pageData[this.flowerPage].startTime = new Date().getTime();
             }
         },
-        "3":function(){
-            RENDERER.render();
+        "3": function () {
+            FLOWERS.render();
             var endTime = new Date().getTime();
-            if(this.pageData[this.flowerPage].startTime != null && endTime - this.pageData[this.flowerPage].startTime > 5000){
+            if (this.pageData[this.flowerPage].startTime != null && endTime - this.pageData[this.flowerPage].startTime > 5000) {
                 this.animateStop();
                 this.startTime = null;
-                this.animateInit(this.pageIndex+1);
-                RENDERER.init(canvas,ctx);
+                this.animateInit(this.pageIndex + 1,4);
+                FLOWERS.init(canvas, ctx);
             }
         },
-        "4":function(){
-
+        "4": function () {
+            FIREWORKS.render();
         },
-        pageData:{
-            "0":{
-                scale:{ x:1, y:1 }
+        pageData: {
+            "0": {
+                scale: {x: 1, y: 1}
             },
-            "1":{
+            "1": {
                 x: 0
             },
-            "2":{
+            "2": {
                 y: 0
             },
-            "3":{
-                startTime:null
+            "3": {
+                startTime: null
             }
         },
-        timer:null,
-        flowerPage:3,
-        maxPageIndex:4,
-        pageIndex:0,
-        animate:function(){
+        timer: null,
+        flowerPage: 3,
+        maxPageIndex: 4,
+        pageIndex: 0,
+        animate: function () {
             this.timer = requestAnimationFrame(this.animate.bind(this));
             ctx.save();
-            ctx.clearRect(0,0,window.innerWidth*2,window.innerHeight*2);
-            pageManage[this.pageIndex+""]();
+            ctx.clearRect(0, 0, window.innerWidth * 2, window.innerHeight * 2);
+            pageManage[this.pageIndex + ""]();
             ctx.restore();
         },
-        animateInit:function(index,bgIndex){
-            if(index === undefined || index === null){
+        animateInit: function (index, bgIndex) {
+            if (index === undefined || index === null) {
                 this.pageIndex++;
-            }else{
+            } else {
                 this.pageIndex = index;
             }
             this.restore();
             imageDrawerArr[this.pageIndex].draw();
-            if(bgIndex === undefined || bgIndex === null){
+            if (bgIndex === undefined || bgIndex === null) {
                 bgIndex = this.pageIndex + 1;
-                if(bgIndex>this.maxPageIndex){
+                if (bgIndex > this.maxPageIndex) {
                     bgIndex = 0
                 }
             }
             this.setBg(bgIndex);
-            setTimeout(function(){
+            setTimeout(function () {
                 requestAnimationFrame(this.animate.bind(this));
-            }.bind(this),200)
+            }.bind(this), 200)
         },
-        animateStop:function(){
+        animateStop: function () {
             cancelAnimationFrame(this.timer);
         },
-        setBg:function(index){
-            document.querySelector("#container").style.background = "url("+img_list[index]+") no-repeat "
-                    +bgArr[index].imgClipData.x+"px "+bgArr[index].imgClipData.y +"px/"
-                    +bgArr[index].imgClipData.width+"px " +bgArr[index].imgClipData.height+"px";
+        setBg: function (index) {
+            document.querySelector("#container").style.background = "url(" + img_list[index] + ") no-repeat "
+                    + bgArr[index].imgClipData.x + "px " + bgArr[index].imgClipData.y + "px/"
+                    + bgArr[index].imgClipData.width + "px " + bgArr[index].imgClipData.height + "px";
         },
-        init:function(context){
+        init: function (context) {
             this.context = context;
         },
-        restore:function(){
+        restore: function () {
             this.context.restore();
             this.context.resetTransform();
             this.context.save();
