@@ -79,7 +79,7 @@ function Firework(x, y) {
     this.xmove = new Walker({radius: 10, speed: 0.5})
     this.x = x || Math.random() * FIREWORKS.canvas.width;
     this.y = y || FIREWORKS.canvas.height;
-    this.height = Math.random() * FIREWORKS.canvas.height / 3;
+    this.height = Math.random() * FIREWORKS.canvas.height / 5;
     this.dead = false
     this.color = randomColor()
 

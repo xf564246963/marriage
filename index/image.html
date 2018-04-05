@@ -26,6 +26,7 @@
     <script src="./js/Tween.js"></script>
     <script src="./js/flowers.js"></script>
     <script src="./js/fireworks.js"></script>
+    <script src="./js/star.js"></script>
 </head>
 <body>
 <div id="container">
@@ -40,7 +41,7 @@
     var cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
 
     var img_list = [];
-    for (var i = 1; i <= 5; i++) {
+    for (var i = 1; i <= 10; i++) {
         img_list.push(i);
     }
     var imgListLen = img_list.length;
@@ -172,6 +173,7 @@
                 pageManage.init(ctx);
                 FLOWERS.init(canvas, ctx);
                 FIREWORKS.init(canvas, ctx);
+                StarRain.init(ctx);
 
 
                 var num = 1;
@@ -280,15 +282,32 @@
         "3": function () {
             FLOWERS.render();
             var endTime = new Date().getTime();
-            if (this.pageData[this.flowerPage].startTime != null && endTime - this.pageData[this.flowerPage].startTime > 5000) {
+            if (this.pageData[this.flowerPage].startTime != null && endTime - this.pageData[this.flowerPage].startTime > 5500) {
                 this.animateStop();
-                this.startTime = null;
+                this.pageData[this.flowerPage].startTime = null;
                 this.animateInit(this.pageIndex + 1,4);
                 FLOWERS.init(canvas, ctx);
+                this.pageData[this.fireworkPage].startTime = new Date().getTime();
             }
         },
         "4": function () {
             FIREWORKS.render();
+            var endTime = new Date().getTime();
+            if (this.pageData[this.fireworkPage].startTime != null && endTime - this.pageData[this.fireworkPage].startTime > 5500) {
+                this.animateStop();
+                this.pageData[this.fireworkPage].startTime = null;
+                this.animateInit(this.pageIndex + 1,5);
+                FIREWORKS.init(canvas, ctx);
+            }
+        },
+        "5": function () {
+            StarRain.render();
+//            if (this.pageData[this.starRainPage].startTime != null && endTime - this.pageData[this.starRainPage].startTime > 5500) {
+//                this.animateStop();
+//                this.pageData[this.starRainPage].startTime = null;
+//                this.animateInit(this.pageIndex + 1,6);
+//                StarRain.init(canvas, ctx);
+//            }
         },
         pageData: {
             "0": {
@@ -302,11 +321,15 @@
             },
             "3": {
                 startTime: null
+            },
+            "4": {
+                startTime: null
             }
         },
         timer: null,
         flowerPage: 3,
-        maxPageIndex: 4,
+        fireworkPage: 4,
+        maxPageIndex: 5,
         pageIndex: 0,
         animate: function () {
             this.timer = requestAnimationFrame(this.animate.bind(this));
