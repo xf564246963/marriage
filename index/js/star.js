@@ -5,7 +5,7 @@ var StarRain = {
     init : function(context){
         this.context = context;
         this.rains = new Array();
-        this.rainCount = 20;
+        this.rainCount = 10;
 
         for (var i=0;i<this.rainCount;i++) {
             var rain = new MeteorRain();
@@ -89,7 +89,7 @@ var MeteorRain = function(){
 
         this.x = Math.random() * window.innerWidth ; //窗口高度
         //纵坐标小于600
-        this.y = Math.random() * window.innerHeight / 3;  //窗口宽度
+        this.y = Math.random() * window.innerHeight / 4;  //窗口宽度
     }
     /****绘制流星***************************/
     this.draw = function () //绘制一个流星的函数
