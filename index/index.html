@@ -23,15 +23,15 @@
         }
 
         .bg1{
-            background: url("./image/1.jpg");
+            background: url("image/12.jpg");
         }
 
         .bg2{
-            background: url("./image/2.jpg");
+            background: url("image/22.jpg");
         }
 
         .bg3{
-            background: url("./image/3.jpg");
+            background: url("image/32.jpg");
         }
 
     </style>
@@ -48,7 +48,7 @@
         var cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
 
         var img_list = [];
-        for(var i = 1; i <= 3; i++ ){
+        for(var i = 1; i <= 4; i++ ){
             img_list.push(i);
         }
         var imgListLen = img_list.length;
@@ -210,7 +210,7 @@
 
                         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-                        if(num != 2){
+                        if(num != 3){
                             cancelAnimationFrame(flowerTimer);
                         }
 
@@ -218,7 +218,7 @@
                             requestAnimationFrame(function(){
 
                                 document.querySelector("body").style.background = "url("+img_list[num]+") no-repeat "+img.imgClipData.x+"px "+img.imgClipData.y+"px/"+img.imgClipData.width+"px "+img.imgClipData.height+"px";
-                                if(num === 2){
+                                if(num === 3){
                                     flowerRenderExecute();
                                 }
                                 num++;

@@ -1,6 +1,3 @@
-/**
- * Created by xiongfeng on 2018/4/3.
- */
 var RENDERER = {
     INIT_CHERRY_BLOSSOM_COUNT : 30,
     MAX_ADDING_INTERVAL : 5,

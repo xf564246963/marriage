@@ -10,7 +10,7 @@
             margin: 0;
         }
 
-        html, body {
+        html, body, #container {
             height: 100%;
             width: 100%;
             overflow: hidden;
@@ -22,26 +22,16 @@
             display: none;
         }
 
-        .bg1{
-            background: url("./image/1.jpg");
-        }
-
-        .bg2{
-            background: url("image/11.jpg");
-        }
-
-        .bg3{
-            background: url("./image/3.jpg");
-        }
-
     </style>
     <script src="./js/Tween.js"></script>
     <script src="./js/flowers.js"></script>
 </head>
-<body style="position: relative;">
-<canvas id="canvas" style="position: absolute;top: 0;left:0;">
-    Your browser does not support the HTML5 canvas tag.
-</canvas>
+<body>
+<div id="container">
+    <canvas id="canvas">
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>
+</div>
 <script>
     var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
             window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
@@ -177,6 +167,7 @@
 
                 Transform.init(ctx);
                 pageManage.init(ctx);
+                RENDERER.init(canvas,ctx);
 
                 var num = 1;
 
@@ -248,62 +239,75 @@
         }
     }
 
-    var complete = false;
-
-    var scale = { x:1, y:1 };
-
-    var x = 0;
-
-    var y = 0
-
     var pageManage = {
+        //每页动画处理逻辑
         "0":function(){
-            scale.x = scale.x - 0.01;
-            scale.y = scale.y - 0.01;
-            Transform.scale(scale.x,scale.y);
-            imageDrawerArr[0].draw();
-            if(scale.x<=0 || scale.y<=0){
-                cancelAnimationFrame(this.timer);
-                scale = { x:1, y:1 };
-                requestAnimationFrame(function(){
-                    this.animateInit(1);
-                }.bind(this))
+            this.pageData[this.pageIndex].scale.x = this.pageData[this.pageIndex].scale.x - 0.01;
+            this.pageData[this.pageIndex].scale.y = this.pageData[this.pageIndex].scale.y - 0.01;
+            Transform.scale(this.pageData[this.pageIndex].scale.x,this.pageData[this.pageIndex].scale.y);
+            imageDrawerArr[this.pageIndex].draw();
+            if(this.pageData[this.pageIndex].scale.x<=0 || this.pageData[this.pageIndex].scale.y<=0){
+                this.animateStop();
+                this.pageData[this.pageIndex].scale = { x:1, y:1 };
+                this.animateInit(this.pageIndex+1);
             }
         },
         "1":function(){
-            x+=4;
-            Transform.translate(x,0);
-            imageDrawerArr[1].draw();
-            if(x>=window.innerWidth){
-                cancelAnimationFrame(this.timer);
-                x = 0;
-                requestAnimationFrame(function(){
-                    this.animateInit(2);
-                }.bind(this))
+            this.pageData[this.pageIndex].x+=4;
+            Transform.translate(this.pageData[this.pageIndex].x,0);
+            imageDrawerArr[this.pageIndex].draw();
+            if(this.pageData[this.pageIndex].x>=window.innerWidth){
+                this.animateStop();
+                this.pageData[this.pageIndex].x = 0;
+                this.animateInit(this.pageIndex+1);
             }
         },
         "2":function(){
-            y+=8
-            Transform.translate(0,y);
-            imageDrawerArr[2].draw();
-            if(y>=window.innerHeight){
-                cancelAnimationFrame(this.timer);
-                y=0
-                requestAnimationFrame(function(){
-                    this.animateInit(0);
-                }.bind(this))
+            this.pageData[this.pageIndex].y+=8;
+            Transform.translate(0,this.pageData[this.pageIndex].y);
+            imageDrawerArr[this.pageIndex].draw();
+            if(this.pageData[this.pageIndex].y>=window.innerHeight){
+                this.animateStop();
+                this.pageData[this.pageIndex].y=0;
+                this.animateInit(this.pageIndex+1,this.flowerPage);
+                this.pageData[this.flowerPage].startTime = new Date().getTime();
+            }
+        },
+        "3":function(){
+            RENDERER.render();
+            var endTime = new Date().getTime();
+            if(this.pageData[this.flowerPage].startTime != null && endTime - this.pageData[this.flowerPage].startTime > 5000){
+                this.animateStop();
+                this.startTime = null;
+                this.animateInit(0);
+                RENDERER.init(canvas,ctx);
+            }
+        },
+        pageData:{
+            "0":{
+                scale:{ x:1, y:1 }
+            },
+            "1":{
+                x: 0
+            },
+            "2":{
+                y: 0
+            },
+            "3":{
+                startTime:null
             }
         },
         timer:null,
+        flowerPage:3,
         pageIndex:0,
         animate:function(){
             this.timer = requestAnimationFrame(this.animate.bind(this));
             ctx.save();
-            ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
+            ctx.clearRect(0,0,window.innerWidth*2,window.innerHeight*2);
             pageManage[this.pageIndex+""]();
             ctx.restore();
         },
-        animateInit:function(index){
+        animateInit:function(index,bgIndex){
             if(index === undefined || index === null){
                 this.pageIndex++;
             }else{
@@ -311,12 +315,14 @@
             }
             this.restore();
             imageDrawerArr[this.pageIndex].draw();
-            setTimeout(function(){
-                var bgIndex = this.pageIndex + 1;
-                if(bgIndex>2){
+            if(bgIndex === undefined || bgIndex === null){
+                bgIndex = this.pageIndex + 1;
+                if(bgIndex>3){
                     bgIndex = 0
                 }
-                this.setBg(bgIndex);
+            }
+            this.setBg(bgIndex);
+            setTimeout(function(){
                 requestAnimationFrame(this.animate.bind(this));
             }.bind(this),200)
         },
@@ -324,7 +330,7 @@
             cancelAnimationFrame(this.timer);
         },
         setBg:function(index){
-            document.querySelector("body").style.background = "url("+img_list[index]+") no-repeat "
+            document.querySelector("#container").style.background = "url("+img_list[index]+") no-repeat "
                     +bgArr[index].imgClipData.x+"px "+bgArr[index].imgClipData.y +"px/"
                     +bgArr[index].imgClipData.width+"px " +bgArr[index].imgClipData.height+"px";
         },
