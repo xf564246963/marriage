@@ -5,7 +5,7 @@ var StarRain = {
     init : function(context,clear){
         this.context = context;
         this.rains = new Array();
-        this.rainCount = 10;
+        this.rainCount = 5;
 
         for (var i=0;i<this.rainCount;i++) {
             var rain = new MeteorRain();
@@ -65,9 +65,9 @@ var MeteorRain = function(){
 
     /**************获取随机颜色函数*****************/
     this.getRandomColor = function (){
-        var a = Math.ceil(255-240* Math.random());
+        var a = Math.ceil(255-15* Math.random());
         //中段颜色
-        this.color1 = "rgba("+a+","+a+","+a+",1)";
+        this.color1 = "rgba("+a+","+a+","+a+","+Math.random().toFixed(1)+")";
         //结束颜色
         this.color2 = "transparent";
     }
@@ -97,6 +97,7 @@ var MeteorRain = function(){
         StarRain.context.beginPath();
         StarRain.context.lineWidth = 1; //宽度
         StarRain.context.globalAlpha = this.alpha; //设置透明度
+        StarRain.context.globalCompositeOperation = 'light';
         //创建横向渐变颜色,起点坐标至终点坐标
         var line = StarRain.context.createLinearGradient(this.x, this.y,
             this.x + this.width,

@@ -5,16 +5,21 @@ var HEARTS = {
     init:function(context){
         this.context = context;
         this.precision = 100;
+        this.heartNum = 6;
         this.hearts = [];
+        for(var i = 0; i < this.heartNum; i++ ){
+            this.hearts.push(new Heart());
+        }
     },
     render: function (a) {
-        this.hearts.push(new Heart())
+        //this.hearts.push(new Heart())
         ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
         for (var i = 0; i < this.hearts.length; i++) {
             this.hearts[i].draw();
             if (this.hearts[i].size <= 0) {
                 this.hearts.splice(i, 1);
                 i--;
+                this.hearts.push(new Heart());
             }
         }
     }
