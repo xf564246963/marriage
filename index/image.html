@@ -28,6 +28,7 @@
     <script src="./js/fireworks.js"></script>
     <script src="./js/star.js"></script>
     <script src="./js/heart.js"></script>
+    <script src="./js/light.js"></script>
 </head>
 <body>
 <div id="container">
@@ -152,8 +153,7 @@
             };
             imgList[i].imageObject.src = imgArr[i];
         }
-    }
-    ;
+    };
 
     var imageDrawerArr = [], bgArr;
 
@@ -176,6 +176,7 @@
                 FIREWORKS.init(canvas, ctx);
                 StarRain.init(ctx);
                 HEARTS.init(ctx);
+                LIGHTS.init(ctx);
 
 
                 var num = 1;
@@ -320,8 +321,19 @@
             if (this.pageData[this.heartsPage].startTime != null && endTime - this.pageData[this.heartsPage].startTime > 5500) {
                 this.animateStop();
                 this.pageData[this.heartsPage].startTime = null;
-                this.animateInit(this.pageIndex + 1);
+                this.animateInit(this.pageIndex + 1,7);
                 HEARTS.init(ctx);
+                this.pageData[this.lightPage].startTime = new Date().getTime();
+            }
+        },
+        "7": function () {
+            LIGHTS.render();
+            var endTime = new Date().getTime();
+            if (this.pageData[this.lightPage].startTime != null && endTime - this.pageData[this.lightPage].startTime > 5500) {
+                this.animateStop();
+                this.pageData[this.lightPage].startTime = null;
+                this.animateInit(this.pageIndex + 1,8);
+                LIGHTS.init(ctx);
             }
         },
         pageData: {
@@ -345,6 +357,9 @@
             },
             "6": {
                 startTime: null
+            },
+            "7": {
+                startTime: null
             }
         },
         timer: null,
@@ -352,7 +367,8 @@
         fireworkPage: 4,
         starRainPage: 5,
         heartsPage:6,
-        maxPageIndex: 6,
+        lightPage:7,
+        maxPageIndex: 7,
         pageIndex: 0,
         animate: function () {
             this.timer = requestAnimationFrame(this.animate.bind(this));
