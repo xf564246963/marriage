@@ -22,6 +22,37 @@
             display: none;
         }
 
+        .falling-leaves {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .leaf-scene {
+            position: absolute;
+            top: 0;
+            left: -100px;
+            bottom: 0;
+            width: 100%;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+        }
+
+        .leaf-scene div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 47px;
+            height: 17px;
+            background: url(./image/sy.png) no-repeat;
+            background-size: 100%;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            -webkit-backface-visibility: visible;
+            backface-visibility: visible;
+        }
+
     </style>
     <script src="./js/Tween.js"></script>
     <script src="./js/flowers.js"></script>
@@ -31,7 +62,7 @@
     <script src="./js/light.js"></script>
 </head>
 <body>
-<div id="container">
+<div id="container" class="falling-leaves">
     <canvas id="canvas">
         Your browser does not support the HTML5 canvas tag.
     </canvas>
@@ -153,7 +184,8 @@
             };
             imgList[i].imageObject.src = imgArr[i];
         }
-    };
+    }
+    ;
 
     var imageDrawerArr = [], bgArr;
 
@@ -177,6 +209,7 @@
                 StarRain.init(ctx);
                 HEARTS.init(ctx);
                 LIGHTS.init(ctx);
+                LEAFS.init();
 
 
                 var num = 1;
@@ -311,7 +344,7 @@
                 this.animateStop();
                 this.pageData[this.starRainPage].startTime = null;
                 this.animateInit(this.pageIndex + 1, 6);
-                StarRain.init(ctx,true);
+                StarRain.init(ctx, true);
                 this.pageData[this.heartsPage].startTime = new Date().getTime();
             }
         },
@@ -321,7 +354,7 @@
             if (this.pageData[this.heartsPage].startTime != null && endTime - this.pageData[this.heartsPage].startTime > 5500) {
                 this.animateStop();
                 this.pageData[this.heartsPage].startTime = null;
-                this.animateInit(this.pageIndex + 1,7);
+                this.animateInit(this.pageIndex + 1, 7);
                 HEARTS.init(ctx);
                 this.pageData[this.lightPage].startTime = new Date().getTime();
             }
@@ -332,8 +365,20 @@
             if (this.pageData[this.lightPage].startTime != null && endTime - this.pageData[this.lightPage].startTime > 5500) {
                 this.animateStop();
                 this.pageData[this.lightPage].startTime = null;
-                this.animateInit(this.pageIndex + 1,8);
+                this.animateInit(this.pageIndex + 1, 8);
                 LIGHTS.init(ctx);
+                this.pageData[this.leafPage].startTime = new Date().getTime();
+            }
+        },
+        "8": function () {
+            document.querySelector(".leaf-scene").style.display = "block";
+            LEAFS.render();
+            var endTime = new Date().getTime();
+            if (this.pageData[this.leafPage].startTime != null && endTime - this.pageData[this.leafPage].startTime > 5500) {
+                this.animateStop();
+                document.querySelector(".leaf-scene").style.display = "none";
+                this.pageData[this.leafPage].startTime = null;
+                this.animateInit(this.pageIndex + 1, 9);
             }
         },
         pageData: {
@@ -360,15 +405,19 @@
             },
             "7": {
                 startTime: null
+            },
+            "8": {
+                startTime: null
             }
         },
         timer: null,
         flowerPage: 3,
         fireworkPage: 4,
         starRainPage: 5,
-        heartsPage:6,
-        lightPage:7,
-        maxPageIndex: 7,
+        heartsPage: 6,
+        lightPage: 7,
+        leafPage: 8,
+        maxPageIndex: 8,
         pageIndex: 0,
         animate: function () {
             this.timer = requestAnimationFrame(this.animate.bind(this));
@@ -383,7 +432,7 @@
             } else {
                 this.pageIndex = index;
             }
-            if(this.pageIndex>this.maxPageIndex){
+            if (this.pageIndex > this.maxPageIndex) {
                 this.pageIndex = 0;
             }
             this.restore();
@@ -403,6 +452,12 @@
             cancelAnimationFrame(this.timer);
         },
         setBg: function (index) {
+
+            //绿叶背景特殊处理图片位置
+            if(img_list[index].indexOf("9.jpg")>-1){
+                bgArr[index].imgClipData.x = -(bgArr[index].imgClipData.width - window.innerWidth/2);
+            }
+
             document.querySelector("#container").style.background = "url(" + img_list[index] + ") no-repeat "
                     + bgArr[index].imgClipData.x + "px " + bgArr[index].imgClipData.y + "px/"
                     + bgArr[index].imgClipData.width + "px " + bgArr[index].imgClipData.height + "px";
@@ -419,5 +474,6 @@
 
 
 </script>
+<script src="./js/leaf.js"></script>
 </body>
 </html>

@@ -72,7 +72,7 @@ Light.prototype.draw = function(context) {
     }
 
     context.beginPath();
-    context.fillStyle="rgba(246,230,191,1)";
+    context.fillStyle="rgba(246,230,191,"+this.alpha.toString()+")";
     context.arc(this.x, this.y, this.particleSize, 0, Math.PI*2, true);
     context.shadowBlur = this.particleSize*2;
     context.shadowColor = "rgba(246,230,191,1)";
