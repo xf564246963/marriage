@@ -455,7 +455,7 @@
 
             //绿叶背景特殊处理图片位置
             if(img_list[index].indexOf("9.jpg")>-1){
-                bgArr[index].imgClipData.x = -(bgArr[index].imgClipData.width - window.innerWidth/2);
+                bgArr[index].imgClipData.x = -parseInt(bgArr[index].imgClipData.width*3/4 - window.innerWidth*3/4);
             }
 
             document.querySelector("#container").style.background = "url(" + img_list[index] + ") no-repeat "
