@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>银联商务2018校园招聘</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="screen-orientation" content="portrait">
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <link rel="stylesheet" type="text/css" href="../css/jquery.fullPage.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="./css/base.css" />
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/imgloader.js"></script>
+    <script type="text/javascript" src="../js/jquery.toast.js"></script>
+    <link rel="stylesheet" href="../css/jquery.toast.css">
+
+    <script type="text/javascript" src="../js/jquery.fullPage.js"></script>
+
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript" src="../js/weiXInshare.js"></script>
+    <script type="text/javascript" src="../js/index.js"></script>
+
+    <script type="text/javascript">
+        $.fn.scrollUnique = function() {
+            return $(this).each(function() {
+                var eventType = 'scroll';
+                $(this).on(eventType, function (event) {
+                    // 一些数据
+                    var scrollTop = this.scrollTop,
+                            scrollHeight = this.scrollHeight,
+                            height = this.clientHeight;
+
+                    if ((scrollTop < 1) || (scrollHeight - height - scrollTop < 1)) {
+                        // 向上滚 || 向下滚
+                        event.preventDefault();
+                        event.stopPropagation();
+                        return false;
+                    }
+                });
+
+            });
+        };
+
+        $(function () {
+            window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", hengshuping, false);
+
+            $('body').removeClass("fullpageClass2");
+            if(window.screen.height-window.innerHeight > 100){
+                $("#section7 .center-obj").css("height","436px");
+            }else {
+                $("#section7 .center-obj").css("height","456px");
+            }
+            $('#fullpage').fullpage({
+                scrollOverflow: true,
+                normalScrollElements: '.scrollable-element',
+                onLeave:function (index,nextIndex,direction) {
+                    $("input").blur();
+                    $("#join-end").css("display","none");
+                    $(".job-detail-body").css("display","none");
+                    $(".list-items-detail").css("display","none");
+                    $("#thumbs-up").css("display","none");
+                },
+                afterRender: function() {
+                },
+                afterLoad: function(anchorLink,index) {
+                }
+            });
+
+            //滚动子元素不影响父元素
+            $('.scrollable-element').scrollUnique();
+
+            var date = new Date();
+            var month = date.getMonth()>=9?date.getMonth()+1:"0"+(date.getMonth()+1);
+            $(".page1-month").text(month);
+
+            var memorialDay = new Date("2010/12/06");
+            var diffDay = parseInt(Math.abs(date.getTime() - memorialDay.getTime()) / 1000 / 60 / 60 /24);
+
+            var inputContent = "", inputContentArr = ["2010.12.06","从孝感、合肥、到上海",diffDay+"天","一路有你","不负时光"];
+            var j = 0, i = 0;
+            var interval = setInterval(function () {
+                var textArr = inputContentArr[j].split("");
+                inputContent += textArr[i];
+                $(".page1-context").html(inputContent+(i & 1? '_' : ''));
+                if(i>=textArr.length-1){
+                    inputContent += "</br>";
+                    i = 0;
+                    j++;
+                    if(j>=inputContentArr.length){
+                        clearInterval(interval);
+                        $(".page1-context").html(inputContent);
+                    }
+                }else{
+                    i++;
+                }
+            },250);
+
+        });
+    </script>
+</head>
+<body  class="fullpageClass1 fullpageClass2">
+<div id="fullpage">
+    <div class="section active" id="section1">
+        <div class="section-bg">
+            <div class="page1-month"></div>
+            <div class="center-obj stage-3d">
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="none" x="0px" y="0px" width="320px" height="200px" viewBox="0 0 320 200">
+                    <g>
+                        <animateMotion path="M 30 141 Q 59.35 116.65 112.6 86.4 139.25 71.25 160 61 L 164 59.4
+Q 169 57.5 174 56.25 190 52.25 200 56 204 57.5 212.65 60.65 220.35 63.8 226.75 67.9 244.1 78.95 261 103" begin="0s" dur="5s" rotate="auto-reverse" fill="freeze"/>
+                        <image href="./image/train.png" height="40" width="40"/>
+                    </g>
+                    <path stroke="#333333" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" fill="none" d="
+M 30 141 Q 59.35 116.65 112.6 86.4 139.25 71.25 160 61 L 164 59.4
+Q 169 57.5 174 56.25 190 52.25 200 56 204 57.5 212.65 60.65 220.35 63.8 226.75 67.9 244.1 78.95 261 103"/>
+                    <text font-family="幼圆" font-size="12" y="160" x="25" opacity="0">武汉
+                        <animate attributeName="opacity" from="0" to="1" begin="0s" dur="2s" fill="freeze"/>
+                    </text>
+                    <text font-family="幼圆" font-size="12" y="80" x="165" opacity="0">合肥
+                        <animate attributeName="opacity" from="0" to="1" begin="2s" dur="1.5s" fill="freeze"/>
+                    </text>
+                    <text font-family="幼圆" font-size="12" y="125" x="260" opacity="0">上海
+                        <animate attributeName="opacity" from="0" to="1" begin="3.5s" dur="1.5s" fill="freeze"/>
+                    </text>
+                </svg>
+                <div class="page1-context">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section" id="section2">
+        <div class="section-bg">
+            <div class="center-obj">
+                <div class="power-main"></div>
+                <div class="power-title"></div>
+                <div class="power-circle-up animated"></div>
+                <div class="power-circle-up-line animated"></div>
+                <div class="power-circle-up-lineIn animatedCircle"></div>
+                <div class="power-circle-up-lineOut animatedCircle"></div>
+                <div class="power-circle-up-text animated"></div>
+                <div class="power-circle-left animated"></div>
+                <div class="power-circle-left-line animated"></div>
+                <div class="power-circle-left-lineIn animatedCircle"></div>
+                <div class="power-circle-left-lineOut animatedCircle"></div>
+                <div class="power-circle-left-text animated"></div>
+                <div class="power-circle-right animated"></div>
+                <div class="power-circle-right-line animated"></div>
+                <div class="power-circle-right-lineIn animatedCircle"></div>
+                <div class="power-circle-right-lineOut animatedCircle"></div>
+                <div class="power-circle-right-text animated"></div>
+                <div class="power-text1 animated"></div>
+                <div class="power-text2 animated"></div>
+                <div class="power-text3 animated">
+                    *尼尔森2015年度亚太地区收单机构排名
+                </div>
+            </div>
+        </div>
+        <div class="bottom-icon fadeInUp animated infinite"></div>
+    </div>
+    <div class="section" id="section3">
+        <div class="section-bg">
+            <div class="center-obj">
+                <div class="map-main"></div>
+                <div class="map-title"></div>
+                <div class="map-circle animated"></div>
+                <div class="map-line animated"></div>
+                <div class="map-fire1 animated infinite hinge"></div>
+                <div class="map-fire2 animated infinite hinge"></div>
+                <div class="map-fire3 animated infinite hinge"></div>
+                <div class="map-fire4 animated infinite hinge"></div>
+                <div class="map-fire5 animated infinite hinge"></div>
+                <div class="map-fire6 animated infinite hinge"></div>
+                <div class="map-fire7 animated infinite hinge"></div>
+                <div class="map-fire8 animated infinite hinge"></div>
+                <div class="map-eye animated"></div>
+                <div class="map-text1 animated"></div>
+                <div class="map-text2 animated"></div>
+                <div class="map-text3 animated"></div>
+            </div>
+        </div>
+        <div class="bottom-icon fadeInUp animated infinite"></div>
+    </div>
+    <div class="section" id="section4">
+        <div class="section-bg"  style="perspective: 200px;">
+            <div class="center-obj"  style="transform-style:preserve-3d">
+                <div class="service-title"></div>
+                <div class="service-line animated"></div>
+                <div class="service-circle-card animated"></div>
+                <div class="service-circle-card-lineIn animated"></div>
+                <div class="service-circle-card-lineOut animated"></div>
+                <div class="service-circle-card-text animated"></div>
+                <div class="service-circle-data animated"></div>
+                <div class="service-circle-data-lineIn animated"></div>
+                <div class="service-circle-data-lineOut animated"></div>
+                <div class="service-circle-data-text animated"></div>
+                <div class="service-circle-web animated"></div>
+                <div class="service-circle-web-lineIn animated"></div>
+                <div class="service-circle-web-lineOut animated"></div>
+                <div class="service-circle-web-text animated"></div>
+                <div class="service-circle-people animated"></div>
+                <div class="service-circle-people-lineIn animated"></div>
+                <div class="service-circle-people-lineOut animated"></div>
+                <div class="service-circle-people-text animated"></div>
+                <div class="service-circle-advert animated"></div>
+                <div class="service-circle-advert-lineIn animated"></div>
+                <div class="service-circle-advert-lineOut animated"></div>
+                <div class="service-circle-advert-text animated"></div>
+                <div class="service-circle-cloud animated"></div>
+                <div class="service-circle-cloud-lineIn animated"></div>
+                <div class="service-circle-cloud-lineOut animated"></div>
+                <div class="service-circle-cloud-text animated"></div>
+                <div class="service-circle-supply animated"></div>
+                <div class="service-circle-supply-lineIn animated"></div>
+                <div class="service-circle-supply-lineOut animated"></div>
+                <div class="service-circle-supply-text animated"></div>
+                <div class="service-circle-AggregatePayment animated"></div>
+                <div class="service-circle-AggregatePayment-lineIn animated"></div>
+                <div class="service-circle-AggregatePayment-lineOut animated"></div>
+                <div class="service-circle-AggregatePayment-text animated"></div>
+                <div class="service-eye animated"></div>
+                <div class="service-text animated"></div>
+            </div>
+        </div>
+        <div class="bottom-icon fadeInUp animated infinite"></div>
+    </div>
+    <div class="section" id="section5">
+        <div class="section-bg">
+            <div class="center-obj">
+                <div class="industry-title"></div>
+                <div class="industry-up-bg animated"></div>
+                <div class="industry-up-img animated"></div>
+                <div class="industry-line-up animated"></div>
+                <div class="industry-left-up-bg animated"></div>
+                <div class="industry-left-up-img animated"></div>
+                <div class="industry-left-down-bg animated"></div>
+                <div class="industry-left-down-img animated"></div>
+                <div class="industry-center-bg animated"></div>
+                <div class="industry-center-text animated"></div>
+                <div class="industry-right-up-bg animated"></div>
+                <div class="industry-right-up-img animated"></div>
+                <div class="industry-right-down-bg animated"></div>
+                <div class="industry-right-down-img animated"></div>
+                <div class="industry-line-down animated"></div>
+                <div class="industry-text1 animated"></div>
+                <div class="industry-text2 animated"></div>
+            </div>
+        </div>
+        <div class="bottom-icon fadeInUp animated infinite"></div>
+    </div>
+    <div class="section" id="section7">
+        <div class="search-job" id="search-job">
+            <div class="center-obj">
+                <div class="search-job-title"></div>
+                <div class="search-box">
+                    <div class="search-box-icon" onclick="iconSearch()"></div>
+                    <div class="search-box-input">
+                        <input type="search"  autocomplete="off" placeholder="请输入需要搜索的职位"  onfocus="getSearchHistory()" onkeyup="filterJobs()" id="searchJob">
+                    </div>
+                </div>
+                <div class="select-items">
+                    <div class="select-city" onclick="selectCity()">
+                        <div class="select-city-value">全国</div>
+                        <div class="select-arrow"></div>
+                    </div>
+                    <div class="filter-line"></div>
+                    <div class="select-jobType" onclick="selectType()">
+                        <div class="select-jobType-value">全部岗位</div>
+                        <div class="select-arrow"></div>
+                    </div>
+                </div>
+                <div class="job-list">
+                    <div class="job-city-select" style="display: none;margin-top: 0.6rem;">
+                        <div class="job-select-items">
+                            <div class="select-item selected-item" onclick="checkItemSelect('0','city','全国')">全国</div>
+                            <div class="select-item" onclick="checkItemSelect('1','city','厦门')">厦门</div>
+                            <div class="select-item" onclick="checkItemSelect('2','city','上海')">上海</div>
+                        </div>
+                        <div class="job-select-items">
+                            <div class="select-item" onclick="checkItemSelect('3','city','武汉')">武汉</div>
+                            <div class="select-item" onclick="checkItemSelect('4','city','北京')">北京</div>
+                            <div class="select-item" onclick="checkItemSelect('5','city','重庆')">重庆</div>
+                        </div>
+                        <div class="job-select-items">
+                            <div class="select-item" onclick="checkItemSelect('6','city','深圳')">深圳</div>
+                            <div class="select-item" onclick="checkItemSelect('7','city','青岛')">青岛</div>
+                            <div class="select-item" onclick="checkItemSelect('8','city','昆明')">昆明</div>
+                        </div>
+                        <div class="job-select-items">
+                            <div class="select-item" onclick="checkItemSelect('9','city','大理')">大理</div>
+                            <div class="select-item" onclick="checkItemSelect('10','city','昭通')">昭通</div>
+                            <div class="select-item" onclick="checkItemSelect('11','city','银川')">银川</div>
+                        </div>
+                    </div>
+                    <div class="job-type-select" style="display: none;margin-top: 0.6rem;">
+                        <div class="job-select-items">
+                            <div class="select-item selected-item" onclick="checkItemSelect('0','type','全部岗位')">全部岗位</div>
+                            <div class="select-item" onclick="checkItemSelect('1','type','技术类')">技术类</div>
+                            <div class="select-item" onclick="checkItemSelect('2','type','市场类')">市场类</div>
+                        </div>
+                        <div class="job-select-items">
+                            <div class="select-item" onclick="checkItemSelect('3','type','综合类')">综合类</div>
+                            <div class="select-item" onclick="checkItemSelect('4','type','管理类')">管理类</div>
+                            <div class="select-item" onclick="checkItemSelect('5','type','产品类')">产品类</div>
+                        </div>
+                        <div class="job-select-items">
+                            <div class="select-item" onclick="checkItemSelect('6','type','服务类')">服务类</div>
+                        </div>
+                    </div>
+                    <div id="job-list-flag"></div>
+                    <div id="job-historySearch-flag"></div>
+                </div>
+            </div>
+            <div class="job-list-bottom">
+                <div class="job-list-pre" onclick="goPrv()">
+                    <div class="job-list-arrow-left"></div>
+                    <div class="job-list-pre-label">上一页</div>
+                </div>
+                <div class="job-list-num">0/0</div>
+                <div class="job-list-next" onclick="goNext()">
+                    <div class="job-list-next-label">下一页</div>
+                    <div class="job-list-arrow-right"></div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-icon fadeInUp animated infinite"></div>
+    </div>
+    <div class="section" id="section8">
+        <div class="section-bg">
+            <div class="list-title"></div>
+            <div class="center-obj" style="top: 52%;">
+                <div id="contentFlag" style="height: 100%"></div>
+            </div>
+            <div class="list-items-detail" style="display: none;">
+                <div class="list-items-detail-box">
+                    <div class="list-items-detail-title">
+                        <div class="list-items-detail-title-line"></div>
+                        <div class="list-items-detail-title-value">宣讲会详情</div>
+                    </div>
+                    <ul class="list-items-detail-up">
+                        <li>华东理工大学</li>
+                        <li>2017-08-29 18:00-20:00</li>
+                        <li>上海市梅陇路789号华东理工大学**校区**楼507会议室</li>
+                        <li>参与线下宣讲会，有机会赢取面试直通名额、云闪付腕表、蓝牙耳机、智能手环，大奖等你来！</li>
+                    </ul>
+                </div>
+                <div class="list-items-detail-close" onclick="ListItemDetailClose()"></div>
+            </div>
+        </div>
+        <div class="bottom-icon fadeInUp animated infinite"></div>
+    </div>
+    <div class="section" id="section9">
+        <div class="section-bg">
+            <div class="place-title"></div>
+            <div class="center-obj">
+                <div class="place-line">
+                    <div class="place-circle1-box">
+                        <div class="place-circle1 animated"></div>
+                        <div class="place-circle-line1 animated">
+                            <div class="place-circle-text1 animated"  onclick="checkLikeCity('1')">武汉</div>
+                        </div>
+                        <div class="place-line1 dashed1 animated"></div>
+                        <div class="place-school1 animated">
+                            <div class="place-school-box place-school-box11" style="z-index:100;" onclick="checkLikeCity('1')">
+                                <div class="place-school-name">武汉理工大学</div>
+                                <div class="place-school-code" style="display: none;"></div>
+                                <div class="place-school-isVoted" style="display: none;"></div>
+                                <div class="place-school-liked">
+                                    <div class="place-school-liked-icon"></div>
+                                    <div class="place-school-liked-num">1908</div>
+                                    <div class="place-school-liked-line"></div>
+                                    <div class="place-school-liked-all">2000</div>
+                                </div>
+                            </div>
+                            <div class="place-school-box place-school-box12" onclick="checkLikeCity('1')">
+                                <div class="place-school-name">华中科技大学</div>
+                                <div class="place-school-code" style="display: none;"></div>
+                                <div class="place-school-isVoted" style="display: none;"></div>
+                                <div class="place-school-liked">
+                                    <div class="place-school-liked-icon"></div>
+                                    <div class="place-school-liked-num">1908</div>
+                                    <div class="place-school-liked-line"></div>
+                                    <div class="place-school-liked-all">2000</div>
+                                </div>
+                                <div class="place-school-box-arrow1" style=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="place-circle2 animated"></div>
+                    <div class="place-circle-line2 animated">
+                        <div class="place-circle-text2 animated" onclick="checkLikeCity('2')">长沙</div>
+                    </div>
+                    <div class="place-line2 dashed2 animated"></div>
+                    <div class="place-school2 animated">
+                        <div class="place-school-box place-school-box21" onclick="checkLikeCity('2')">
+                            <div class="place-school-name">中南大学</div>
+                            <div class="place-school-code" style="display: none;"></div>
+                            <div class="place-school-isVoted" style="display: none;"></div>
+                            <div class="place-school-liked">
+                                <div class="place-school-liked-icon"></div>
+                                <div class="place-school-liked-num">1908</div>
+                                <div class="place-school-liked-line"></div>
+                                <div class="place-school-liked-all">2000</div>
+                            </div>
+                            <div class="place-school-box-arrow2" style=""></div>
+                        </div>
+                    </div>
+
+                    <div class="place-circle3 animated"></div>
+                    <div class="place-circle-line3 animated">
+                        <div class="place-circle-text3 animated" onclick="checkLikeCity('3')">上海</div>
+                    </div>
+                    <div class="place-line3 dashed3 animated"></div>
+                    <div class="place-school3 animated">
+                        <div class="place-school-box place-school-box31" onclick="checkLikeCity('3')">
+                            <div class="place-school-name">华东理工大学</div>
+                            <div class="place-school-code" style="display: none;"></div>
+                            <div class="place-school-isVoted" style="display: none;"></div>
+                            <div class="place-school-liked">
+                                <div class="place-school-liked-icon"></div>
+                                <div class="place-school-liked-num">1908</div>
+                                <div class="place-school-liked-line"></div>
+                                <div class="place-school-liked-all">2000</div>
+                            </div>
+                            <div class="place-school-box-arrow3" style=""></div>
+                        </div>
+                        <div class="place-school-box place-school-box32" onclick="checkLikeCity('3')">
+                            <div class="place-school-name">上海大学</div>
+                            <div class="place-school-code" style="display: none;"></div>
+                            <div class="place-school-isVoted" style="display: none;"></div>
+                            <div class="place-school-liked">
+                                <div class="place-school-liked-icon"></div>
+                                <div class="place-school-liked-num">1908</div>
+                                <div class="place-school-liked-line"></div>
+                                <div class="place-school-liked-all">2000</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="place-circle4 animated"></div>
+                    <div class="place-circle-line4 animated">
+                        <div class="place-circle-text4 animated" onclick="checkLikeCity('4')">长春</div>
+                    </div>
+                    <div class="place-line4 dashed4 animated"></div>
+                    <div class="place-school4 animated">
+                        <div class="place-school-box place-school-box41" style="z-index:10;" onclick="checkLikeCity('4')">
+                            <div class="place-school-name">吉林大学</div>
+                            <div class="place-school-code" style="display: none;"></div>
+                            <div class="place-school-isVoted" style="display: none;"></div>
+                            <div class="place-school-liked">
+                                <div class="place-school-liked-icon"></div>
+                                <div class="place-school-liked-num">1908</div>
+                                <div class="place-school-liked-line"></div>
+                                <div class="place-school-liked-all">2000</div>
+                            </div>
+                            <div class="place-school-box-arrow4" style=""></div>
+                        </div>
+                    </div>
+
+                    <div class="place-circle5 animated"></div>
+                    <div class="place-circle-line5 animated">
+                        <div class="place-circle-text5 animated" onclick="checkLikeCity('5')">重庆</div>
+                    </div>
+                    <div class="place-line5 dashed5 animated"></div>
+                    <div class="place-school5 animated">
+                        <div class="place-school-box place-school-box51" onclick="checkLikeCity('5')">
+                            <div class="place-school-name">重庆大学</div>
+                            <div class="place-school-code" style="display: none;"></div>
+                            <div class="place-school-isVoted" style="display: none;"></div>
+                            <div class="place-school-liked">
+                                <div class="place-school-liked-icon"></div>
+                                <div class="place-school-liked-num">1908</div>
+                                <div class="place-school-liked-line"></div>
+                                <div class="place-school-liked-all">2000</div>
+                            </div>
+                            <div class="place-school-box-arrow5" style=""></div>
+                        </div>
+                    </div>
+
+                    <div class="place-circle6 animated"></div>
+                    <div class="place-circle-line6 animated">
+                        <div class="place-circle-text6 animated" onclick="checkLikeCity('6')">南京</div>
+                    </div>
+                    <div class="place-line6 dashed6 animated"></div>
+                    <div class="place-school6 animated">
+                        <div class="place-school-box place-school-box61" onclick="checkLikeCity('6')">
+                            <div class="place-school-name">东南大学</div>
+                            <div class="place-school-code" style="display: none;"></div>
+                            <div class="place-school-isVoted" style="display: none;"></div>
+                            <div class="place-school-liked">
+                                <div class="place-school-liked-icon"></div>
+                                <div class="place-school-liked-num">1908</div>
+                                <div class="place-school-liked-line"></div>
+                                <div class="place-school-liked-all">2000</div>
+                            </div>
+                            <div class="place-school-box-arrow6" style=""></div>
+                        </div>
+                    </div>
+
+                    <div class="place-circle7 animated"></div>
+                    <div class="place-circle-line7 animated">
+                        <div class="place-circle-text7 animated" onclick="checkLikeCity('7')">厦门</div>
+                    </div>
+                    <div class="place-line7 dashed7 animated"></div>
+                    <div class="place-school7 animated">
+                        <div class="place-school-box place-school-box71" onclick="checkLikeCity('7')">
+                            <div class="place-school-name">厦门大学</div>
+                            <div class="place-school-code" style="display: none;"></div>
+                            <div class="place-school-isVoted" style="display: none;"></div>
+                            <div class="place-school-liked">
+                                <div class="place-school-liked-icon"></div>
+                                <div class="place-school-liked-num">1908</div>
+                                <div class="place-school-liked-line"></div>
+                                <div class="place-school-liked-all">2000</div>
+                            </div>
+                            <div class="place-school-box-arrow7" style=""></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="thumbs-up" style="display: none">
+                <div id="thumbs-up-bg" class="thumbs-up-one">
+                    <div class="thumbs-up-item">
+                        <div class="school-name">
+                            <div class="school-name-line"></div>
+                            <span class="school-name-value">华东理工大学</span>
+                            <div class="school-name-code" style="display: none;"></div>
+                        </div>
+                        <ul>
+                            <li class="thumb-up-text">
+                                当前点赞数
+                                <span style="font-size: 1.2rem;color: #3478e9;padding: 0 5px;">1908</span>
+                                还差
+                                <span>92</span>
+                                个赞，即可让当天面试直通车名额翻倍哦~
+                            </li>
+                        </ul>
+                        <div id="thumb-up-imgs-up" class="thumb-up-img" onclick="thumbsUp(0)">
+                            <div class="thumb-up-img-label">点赞</div>
+                        </div>
+                    </div>
+                    <div class="thumbs-up-item">
+                        <div class="thumbs-up-item-line"></div>
+                        <div class="school-name">
+                            <div class="school-name-line"></div>
+                            <span class="school-name-value">华东理工大学</span>
+                            <div class="school-name-code" style="display: none;"></div>
+                        </div>
+                        <ul>
+                            <li class="thumb-up-text">
+                                当前点赞数
+                                <span style="font-size: 1.2rem;color: #3478e9;padding: 0 5px;">1908</span>
+                                还差
+                                <span>92</span>
+                                个赞，即可让当天面试直通车名额翻倍哦~
+                            </li>
+                        </ul>
+                        <div id="thumb-up-imgs-down" class="thumb-up-img" onclick="thumbsUp(1)">
+                            <div class="thumb-up-img-label">点赞</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="thumb-up-close" onclick="closeThumbsUp()"></div>
+            </div>
+            <div class="place-text">
+                注：截止宣讲会开始前2个小时，点赞数集够2000则该场宣讲会面试直通名额翻倍哦，赶紧分享点赞咯
+            </div>
+        </div>
+        <div class="bottom-icon fadeInUp animated infinite"></div>
+    </div>
+    <div class="section" id="section10">
+        <div class="section-bg">
+            <div class="center-obj">
+                <div class="join-title"></div>
+                <div class="join-warning">
+                    <div class="join-warning-text">您暂时还没有报名参加宣讲会哦~</div>
+                </div>
+                <div class="join-input">
+                    <div class="join-input-name">
+                        <label class="nameLabel">姓名</label>
+                        <div class="join-input-line"></div>
+                        <input id="name" placeholder="请输入您的姓名"  onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的姓名'">
+                    </div>
+                    <div class="join-input-city">
+                        <label for="SeminarUniversity" class="SeminarUniversityLabel">宣讲学校</label>
+                        <div class="join-input-line"></div>
+                        <!--<input id="SeminarUniversity" placeholder="请选择宣讲学校" value="" readonly>-->
+                        <select id="SeminarUniversity">
+                            <option value="">请选择宣讲学校</option>
+                        </select>
+                        <div class="join-input-right-arrow"></div>
+                    </div>
+                    <div class="join-input-school">
+                        <label for="school" class="schoolLabel">就读学校</label>
+                        <div class="join-input-line"></div>
+                        <input id="school" placeholder="请输入学校名称" onfocus="this.placeholder=''" onblur="this.placeholder='请输入学校名称'" onkeyup="this.value=this.value.replace(/[^\u4e00-\u9fa5\w,，\(\)\（\）\s]/g,'');">
+                    </div>
+                    <div class="join-input-degree">
+                        <label for="degree" class="degreeLabel">学历</label>
+                        <div class="join-input-line"></div>
+                        <!--<input id="degree" placeholder="请选择学历" value="" readonly>-->
+                        <select id="degree">
+                            <option value="">请选择学历</option>
+                            <option value="1">本科</option>
+                            <option value="2">研究生</option>
+                            <option value="3">博士</option>
+                            <option value="4">其他</option>
+                        </select>
+                        <div class="join-input-right-arrow"></div>
+                    </div>
+                    <div class="join-input-phone">
+                        <label for="phone" class="phoneLabel">手机号</label>
+                        <div class="join-input-line"></div>
+                        <input id="phone" placeholder="请输入手机号" type="tel" onfocus="this.placeholder=''" onblur="this.placeholder='请输入手机号'" oninput="if(value.length>11)value=value.slice(0,11)">
+                        <input id="phonecode" placeholder="" onclick="getCode()" readonly onfocus="this.blur()">
+                        <div class="waitingcode" style="display: none;font-size: 0.6rem">
+                            <div class="waitingcodelabel">
+                                <label for="sec" style="position: relative;height: 34px;font-size: 0.6rem;margin: 0 0 0 1%;">已发送</label>
+                                <input id="sec" placeholder="" value="" readonly onfocus="this.blur()" style="width: 36%;height: 34px;font-size: 0.6rem;margin: 0;text-align: right;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="join-input-code">
+                        <label for="code" class="codeLabel">验证码</label>
+                        <div class="join-input-line"></div>
+                        <input id="code" placeholder="请输入验证码" type="number" onfocus="this.placeholder=''" onblur="this.placeholder='请输入验证码'" oninput="if(value.length>6)value=value.slice(0,6)" >
+                    </div>
+                    <div class="join-input-button" onclick="joinSubmit()"></div>
+                </div>
+                <div class="join-input-text">
+                    1、参与线下宣讲会，有机会赢取面试直通名额、云闪付腕表、蓝牙耳机、智能手环，大奖等你来！
+                    <br>
+                    2、简历投递：宣讲会现场投递或网申campus.chinaums.com。
+                </div>
+            </div>
+            <div id="join-end" style="display: none">
+                <div id="ifSuccess" class="join-success">
+                    <div class="join-end-text">
+                        银联商务<span class="join-seminarUniversity"></span>的宣讲会报名成功<br>
+                        我们将会用短信通知你具体的宣讲消息<br>
+                        注意查收哦~
+                    </div>
+                    <div class="join-end-text" style="display: none;">
+                        可能是网络等等原因<br>
+                        导致你本次的报名没有成功<br>
+                        重新约起来吧~
+                    </div>
+                    <div class="join-end-button" onclick="joinSubmitEnd()">知道了</div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-icon fadeInUp animated infinite"></div>
+    </div>
+    <div class="section" id="section11">
+        <div class="section-bg">
+            <div class="center-obj">
+                <div class="end-big-text1 animated"></div>
+                <div class="end-text1 animated"></div>
+                <div class="end-line animated"></div>
+                <div class="end-text2 animated"></div>
+                <div class="end-text3 animated"></div>
+                <div class="end-text4 animated"></div>
+                <div class="end-text5 animated"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="job-detail-body" style="display: none;">
+    <div class="job-detail-box">
+        <div class="job-detail-box">
+            <div class="scrollable-element" style="width: 76%;margin-left: 12%;height: 62%;margin-top: 32%; overflow-x: hidden;overflow-y:auto;">
+                <div class="job-detail-title">
+                    <div class="job-detail-title-line"></div>
+                    <div class="job-detail-title-value">产品设计岗</div>
+                </div>
+                <div class="job-detail-up" style="min-height: 176px;height:auto;">
+                    <div>学历要求：</div>
+                    <pre style="margin: 0;color:#5e5e5e;white-space: pre-wrap;word-wrap: break-word;"><div>专业要求：</div></pre>
+                    <div>工作地点：</div>
+                    <div>需求数量：</div>
+                    <div>所属公司：</div>
+                    <div>所属部门：</div>
+                </div>
+                <div class="job-detail-line"></div>
+                <div class="job-detail-down" style="min-height: 176px;height: auto;">
+                    <div style=" margin-bottom: .7rem;font-size: 1.4rem;color:#000;">岗位职责</div>
+                    <pre style="margin: 0;color:#5e5e5e;white-space: pre-wrap;word-wrap: break-word;"><div class="responsibility"></div></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="job-detail-close" onclick="JobDetailClose()"></div>
+</div>
+</body>
+</html>
