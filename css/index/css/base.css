@@ -1,3 +1,9 @@
+@font-face
+{
+    font-family: weddingFont;
+    src: url('yDk0iw76.ttf');
+}
+
 .section-bg{
     z-index: 2;
     background-size: 100% 100% !important;
@@ -25,13 +31,35 @@
     border-radius: 50%;
 }
 
+.page1-title{
+    text-align: center;
+    width:100%;
+    font-size: 1.5rem;
+    color:#fff;
+    position: absolute;
+    top:0%;
+}
+
 .page1-date{
     text-align: center;
     width:100%;
     font-size: 1rem;
     color:#fff;
     position: absolute;
+    bottom:16%;
+}
+
+.page1-name{
+    text-align: center;
+    width:100%;
+    font-size: 1rem;
+    color:#fff;
+    position: absolute;
     bottom:8%;
+}
+
+.page1-name>span{
+    color:lightpink;
 }
 
 .page1-content{
@@ -67,6 +95,57 @@
     text-align: right;
     line-height: 2rem;
     z-index:4;
+}
+
+.page3-bg{
+    background: url("../image/3.png") no-repeat center center;
+}
+
+.page3-man{
+    width: 45%;
+    position: absolute;
+    right: 15%;
+    bottom: 0%;
+}
+
+.page3-woman{
+    width: 45%;
+    position: absolute;
+    left: 15%;
+}
+
+.page3-left-word{
+    position: absolute;
+    right: 20%;
+    top:10%
+}
+
+.page3-right-word{
+    position: absolute;
+    left: 20%;
+    bottom:10%
+}
+
+.page3-left-word>div,.page3-right-word>div{
+    font-size: 1rem;
+    width:1.2rem;
+    text-align: center;
+}
+
+.page4-bg{
+    background: url("../image/4.png") no-repeat center center;
+}
+
+.page5-bg{
+    background: url("../image/5.png") no-repeat center center;
+}
+
+.page6-bg{
+    background: url("../image/6.png") no-repeat center center;
+}
+
+.page7-bg{
+    background: url("../image/7.png") no-repeat center center;
 }
 
 .center{
