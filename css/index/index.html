@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>银联商务2018校园招聘</title>
+    <title>熊峰&余盼婚礼请柬</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="screen-orientation" content="portrait">
     <!-- QQ强制竖屏 -->
@@ -55,11 +55,7 @@
                 scrollOverflow: true,
                 normalScrollElements: '.scrollable-element',
                 onLeave:function (index,nextIndex,direction) {
-                    $("input").blur();
-                    $("#join-end").css("display","none");
-                    $(".job-detail-body").css("display","none");
-                    $(".list-items-detail").css("display","none");
-                    $("#thumbs-up").css("display","none");
+                    pageManage[index]&&pageManage[index]();
                 },
                 afterRender: function() {
                 },
@@ -70,90 +66,67 @@
             //滚动子元素不影响父元素
             $('.scrollable-element').scrollUnique();
 
-            var date = new Date();
-            var month = date.getMonth()>=9?date.getMonth()+1:"0"+(date.getMonth()+1);
-            $(".page1-month").text(month);
-
-            var memorialDay = new Date("2010/12/06");
-            var diffDay = parseInt(Math.abs(date.getTime() - memorialDay.getTime()) / 1000 / 60 / 60 /24);
-
-            var inputContent = "", inputContentArr = ["2010.12.06","从孝感、合肥、到上海",diffDay+"天","一路有你","不负时光"];
-            var j = 0, i = 0;
-            var interval = setInterval(function () {
-                var textArr = inputContentArr[j].split("");
-                inputContent += textArr[i];
-                $(".page1-context").html(inputContent+(i & 1? '_' : ''));
-                if(i>=textArr.length-1){
-                    inputContent += "</br>";
-                    i = 0;
-                    j++;
-                    if(j>=inputContentArr.length){
-                        clearInterval(interval);
-                        $(".page1-context").html(inputContent);
-                    }
-                }else{
-                    i++;
-                }
-            },250);
-
         });
+
+        var pageManage = {
+            "0":function(){
+
+            },
+            "1":function(){
+                $(".page2-bg>.center-obj").prepend('<svg class="page2-svg" xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="none" x="0px" y="0px" width="320px" height="200px" viewBox="0 0 320 200"> <g> <animateMotion path="M 30 141 Q 59.35 116.65 112.6 86.4 139.25 71.25 160 61 L 164 59.4Q 169 57.5 174 56.25 190 52.25 200 56 204 57.5 212.65 60.65 220.35 63.8 226.75 67.9 244.1 78.95 261 103" begin="0s" dur="5s" rotate="auto-reverse" fill="freeze"/> <image href="./image/train.png" height="40" width="40"/> </g> <path stroke="#333333" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" fill="none" d="M 30 141 Q 59.35 116.65 112.6 86.4 139.25 71.25 160 61 L 164 59.4Q 169 57.5 174 56.25 190 52.25 200 56 204 57.5 212.65 60.65 220.35 63.8 226.75 67.9 244.1 78.95 261 103"/> <text font-family="幼圆" font-size="12" y="160" x="25" opacity="0">武汉 <animate attributeName="opacity" from="0" to="1" begin="0s" dur="2s" fill="freeze"/> </text> <text font-family="幼圆" font-size="12" y="80" x="165" opacity="0">合肥 <animate attributeName="opacity" from="0" to="1" begin="2s" dur="1.5s" fill="freeze"/> </text> <text font-family="幼圆" font-size="12" y="125" x="260" opacity="0">上海 <animate attributeName="opacity" from="0" to="1" begin="3.5s" dur="1.5s" fill="freeze"/></text></svg>')
+                var date = new Date();
+                var month = date.getMonth()>=9?date.getMonth()+1:"0"+(date.getMonth()+1);
+                $(".page2-month").text(month);
+                clearInterval(this.pageData[1].interval);
+                var memorialDay = new Date("2010/12/06");
+                var diffDay = parseInt(Math.abs(date.getTime() - memorialDay.getTime()) / 1000 / 60 / 60 /24);
+
+                var inputContent = "", inputContentArr = ["2010.12.06","从孝感、合肥、到上海",diffDay+"天","一路有你","不负时光"];
+                var j = 0, i = 0;
+                this.pageData[1].interval = setInterval(function () {
+                    var textArr = inputContentArr[j].split("");
+                    inputContent += textArr[i];
+                    $(".page2-context").html(inputContent+(i & 1? '_' : ''));
+                    if(i>=textArr.length-1){
+                        inputContent += "</br>";
+                        i = 0;
+                        j++;
+                        if(j>=inputContentArr.length){
+                            clearInterval(this.pageData[1].interval);
+                            $(".page2-context").html(inputContent);
+                        }
+                    }else{
+                        i++;
+                    }
+                }.bind(this),250);
+            },
+            pageData:{
+                "1":{
+                    interval:null
+                }
+            }
+        }
     </script>
 </head>
 <body  class="fullpageClass1 fullpageClass2">
 <div id="fullpage">
     <div class="section active" id="section1">
-        <div class="section-bg">
-            <div class="page1-month"></div>
-            <div class="center-obj stage-3d">
-                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="none" x="0px" y="0px" width="320px" height="200px" viewBox="0 0 320 200">
-                    <g>
-                        <animateMotion path="M 30 141 Q 59.35 116.65 112.6 86.4 139.25 71.25 160 61 L 164 59.4
-Q 169 57.5 174 56.25 190 52.25 200 56 204 57.5 212.65 60.65 220.35 63.8 226.75 67.9 244.1 78.95 261 103" begin="0s" dur="5s" rotate="auto-reverse" fill="freeze"/>
-                        <image href="./image/train.png" height="40" width="40"/>
-                    </g>
-                    <path stroke="#333333" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" fill="none" d="
-M 30 141 Q 59.35 116.65 112.6 86.4 139.25 71.25 160 61 L 164 59.4
-Q 169 57.5 174 56.25 190 52.25 200 56 204 57.5 212.65 60.65 220.35 63.8 226.75 67.9 244.1 78.95 261 103"/>
-                    <text font-family="幼圆" font-size="12" y="160" x="25" opacity="0">武汉
-                        <animate attributeName="opacity" from="0" to="1" begin="0s" dur="2s" fill="freeze"/>
-                    </text>
-                    <text font-family="幼圆" font-size="12" y="80" x="165" opacity="0">合肥
-                        <animate attributeName="opacity" from="0" to="1" begin="2s" dur="1.5s" fill="freeze"/>
-                    </text>
-                    <text font-family="幼圆" font-size="12" y="125" x="260" opacity="0">上海
-                        <animate attributeName="opacity" from="0" to="1" begin="3.5s" dur="1.5s" fill="freeze"/>
-                    </text>
-                </svg>
-                <div class="page1-context">
-
+        <div class="section-bg page1-bg">
+            <div class="center-obj">
+                <div class="page1-flower center">
                 </div>
+                <img class="page1-cover center" src="./image/1-cover.png" alt=""/>
+                <div class="page1-date">2018.05.20</div>
+                <div class="page1-content">我们结婚了</div>
             </div>
         </div>
+        <div class="bottom-icon fadeInUp animated infinite"></div>
     </div>
     <div class="section" id="section2">
-        <div class="section-bg">
+        <div class="section-bg page2-bg">
+            <!--<div class="page2-month"></div>-->
             <div class="center-obj">
-                <div class="power-main"></div>
-                <div class="power-title"></div>
-                <div class="power-circle-up animated"></div>
-                <div class="power-circle-up-line animated"></div>
-                <div class="power-circle-up-lineIn animatedCircle"></div>
-                <div class="power-circle-up-lineOut animatedCircle"></div>
-                <div class="power-circle-up-text animated"></div>
-                <div class="power-circle-left animated"></div>
-                <div class="power-circle-left-line animated"></div>
-                <div class="power-circle-left-lineIn animatedCircle"></div>
-                <div class="power-circle-left-lineOut animatedCircle"></div>
-                <div class="power-circle-left-text animated"></div>
-                <div class="power-circle-right animated"></div>
-                <div class="power-circle-right-line animated"></div>
-                <div class="power-circle-right-lineIn animatedCircle"></div>
-                <div class="power-circle-right-lineOut animatedCircle"></div>
-                <div class="power-circle-right-text animated"></div>
-                <div class="power-text1 animated"></div>
-                <div class="power-text2 animated"></div>
-                <div class="power-text3 animated">
-                    *尼尔森2015年度亚太地区收单机构排名
+                <div class="page2-context">
                 </div>
             </div>
         </div>
