@@ -8,49 +8,16 @@
     <!-- QQ强制竖屏 -->
     <meta name="x5-orientation" content="portrait">
     <link rel="stylesheet" type="text/css" href="../css/jquery.fullPage.css" />
-    <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <link rel="stylesheet" type="text/css" href="./css/base.css" />
     <script type="text/javascript" src="../js/jquery.js"></script>
-    <script type="text/javascript" src="../js/imgloader.js"></script>
-    <script type="text/javascript" src="../js/jquery.toast.js"></script>
-    <link rel="stylesheet" href="../css/jquery.toast.css">
 
     <script type="text/javascript" src="../js/jquery.fullPage.js"></script>
 
-    <script type="text/javascript" src="../js/common.js"></script>
-    <script type="text/javascript" src="../js/weiXInshare.js"></script>
-    <script type="text/javascript" src="../js/index.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=8BB7F0E5C9C77BD6B9B655DB928B74B6E2D838FD"></script>
 
     <script type="text/javascript">
-        $.fn.scrollUnique = function() {
-            return $(this).each(function() {
-                var eventType = 'scroll';
-                $(this).on(eventType, function (event) {
-                    // 一些数据
-                    var scrollTop = this.scrollTop,
-                            scrollHeight = this.scrollHeight,
-                            height = this.clientHeight;
-
-                    if ((scrollTop < 1) || (scrollHeight - height - scrollTop < 1)) {
-                        // 向上滚 || 向下滚
-                        event.preventDefault();
-                        event.stopPropagation();
-                        return false;
-                    }
-                });
-
-            });
-        };
 
         $(function () {
-            window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", hengshuping, false);
-
-            $('body').removeClass("fullpageClass2");
-            if(window.screen.height-window.innerHeight > 100){
-                $("#section7 .center-obj").css("height","436px");
-            }else {
-                $("#section7 .center-obj").css("height","456px");
-            }
             $('#fullpage').fullpage({
                 scrollOverflow: true,
                 normalScrollElements: '.scrollable-element',
@@ -66,10 +33,6 @@
                 afterLoad: function(anchorLink,index) {
                 }
             });
-
-            //滚动子元素不影响父元素
-            $('.scrollable-element').scrollUnique();
-
             LEAFS.init();
             var imageObject = {};
             imageObject.imageObject = new Image;
@@ -154,7 +117,7 @@
         }
     </script>
 </head>
-<body  class="fullpageClass1 fullpageClass2">
+<body>
 <div id="fullpage">
     <div class="section active" id="section1">
         <div class="section-bg page1-bg">
@@ -242,18 +205,42 @@
     <div class="section" id="section8">
         <div class="section-bg">
             <div class="center-obj">
-
+                <div class="page8-title">Say to Us</div>
+                <input class="page8-input" type="tel" placeholder="手机号" maxlength="11" name="phone"/>
+                <input class="page8-input" type="text" placeholder="姓名" maxlength="4" name="userName"/>
+                <input class="page8-input" type="text" placeholder="祝福" name="wish"/>
+                <div class="page8-button">提交</div>
+                <div class="page8-contact box">
+                    <div class="box-1">联系新郎</div>
+                    <div class="box-1">联系新娘</div>
+                </div>
             </div>
         </div>
     </div>
     <div class="section" id="section9">
         <div class="section-bg">
             <div class="center-obj">
-
+                <div class="center page9-location" id="location"></div>
             </div>
         </div>
     </div>
 </div>
+<audio src="./audio/ifYouBecomeWind.mp3" autoplay="autoplay" loop="loop">
+</audio>
 <script src="./js/leaf.js"></script>
+<script>
+    // 百度地图API功能
+    var map = new BMap.Map("location");
+
+    // 创建地址解析器实例
+    var myGeo = new BMap.Geocoder();
+    // 将地址解析结果显示在地图上,并调整地图视野
+    myGeo.getPoint("孝感市金华天商务酒店", function(point){
+        if (point) {
+            map.centerAndZoom(point, 20);
+            map.addOverlay(new BMap.Marker(point));
+        }
+    }, "孝感市");
+</script>
 </body>
 </html>

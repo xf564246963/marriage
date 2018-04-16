@@ -4,6 +4,11 @@
     src: url('yDk0iw76.ttf');
 }
 
+body{
+    background: #fff;
+    font-family: "weddingFont","Ó×Ô²", "·ÂËÎ", "Helvetica Rounded", Arial, sans-serif;
+}
+
 .section-bg{
     z-index: 2;
     background: url("../image/2.png") no-repeat center center;
@@ -231,6 +236,80 @@
     /*background: url("../image/7.png") no-repeat center center;*/
 /*}*/
 
+.page8-title{
+    color:#fff;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.page8-input{
+    position: absolute;
+    height: 2rem;
+    line-height: 2rem;
+    font-size: 0.8rem;
+    width: 60%;
+    padding: 0 2%;
+    margin: 0 18%;
+    -webkit-appearance: none;
+    border: 1px solid #fff;
+    background: #bbe3d8;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.page8-input:nth-child(2){
+    top: 15%;
+}
+
+.page8-input:nth-child(3){
+    top: 30%;
+}
+
+.page8-input:nth-child(4){
+    top: 45%;
+}
+
+.page8-button{
+    position: absolute;
+    top:60%;
+    height: 2rem;
+    line-height: 2rem;
+    font-size: 0.8rem;
+    width: 66%;
+    margin: 0 17%;
+    -webkit-appearance: none;
+    border: 1px solid #fff;
+    background: #bbe3d8;
+    color: #fff;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.page8-contact{
+    position: absolute;
+    top: 80%;
+    width: 70%;
+    margin: 0 15%;
+    height: 2rem;
+    line-height: 2rem;
+    font-size: 0.8rem;
+}
+
+.page8-contact>div{
+    -webkit-appearance: none;
+    border: 1px solid #fff;
+    background: #bbe3d8;
+    color: #fff;
+    border-radius: 20px;
+    text-align: center;
+    margin:0 2%;
+}
+
+.page9-location{
+    width: 70%;
+    height: 55%;
+}
+
 .falling-leaves {
     position: absolute;
     width: 100vw;
@@ -268,4 +347,140 @@
     left: 50%;
     -webkit-transform: translate3d(-50%,-50%,0);
     transform: translate3d(-50%,-50%,0);
+}
+
+.center-obj {
+    width: 320px;
+    height: 420px;
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    -webkit-transform: translate3d(-50%,-50%,0);
+    transform: translate3d(-50%,-50%,0);
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+}
+
+.stage-3d{
+    perspective: 200px;
+    -webkit-perspective: 200px;
+}
+
+.box{
+    display: box;
+    display: -webkit-box;
+}
+
+.box-1{
+    -webkit-box-flex: 1;
+    box-flex:1;
+}
+
+
+.align-center{
+    text-align: center;
+}
+
+.bottom-icon{
+    z-index: 10;
+    background: url("../image/up.png") no-repeat center 0;
+    background-size: 100%;
+    width: 10%;
+    height: 100%;
+    position: absolute;
+    top: 90%;
+    left: 45%;
+}
+
+input::-webkit-input-placeholder{
+    color:#fff;
+}
+input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+    color:#fff;
+}
+input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+    color:#fff;
+}
+input:-ms-input-placeholder{  /* Internet Explorer 10-11 */
+    color:#fff;
+}
+
+
+@media only screen and (max-device-width: 414px) and (min-device-width: 412px){
+    .center-obj {
+        zoom: 1.3;
+    }
+    html,body{
+        font-size:18px ;
+    }
+}
+@media only screen and (max-device-width: 411px) and (min-device-width: 375px){
+    .center-obj {
+        zoom: 1.2;
+    }
+    html,body{
+        font-size:16px ;
+    }
+}
+@media only screen and (max-device-width: 374px) and (min-device-width: 360px){
+    .center-obj {
+        zoom: 1.1;
+    }
+    html,body{
+        font-size:14px ;
+    }
+}
+
+@media only screen and (max-device-width: 359px) and (min-device-width: 320px){
+    .center-obj {
+        zoom: 1;
+    }
+    html,body{
+        font-size:12px ;
+    }
+}
+
+@-webkit-keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(20px);
+        transform: translateY(20px)
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0)
+    }
+}
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(20px);
+        -ms-transform: translateY(20px);
+        transform: translateY(20px)
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform: translateY(0)
+    }
+}
+.fadeInUp{
+    animation-name: fadeInUp;
+    -webkit-animation-name: fadeInUp;
+}
+
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: backwards;
+    animation-fill-mode: backwards;
+}
+
+.infinite {
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite
 }
