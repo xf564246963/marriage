@@ -76,7 +76,7 @@
                 if($(".page2-bg>.center-obj>svg")){
                     $(".page2-bg>.center-obj>svg").remove();
                 }
-                $(".page2-bg>.center-obj").prepend('<svg class="page2-svg" xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="none" x="0px" y="0px" width="320px" height="200px" viewBox="0 0 320 200"> <g> <animateMotion path="M 30 141 Q 59.35 116.65 112.6 86.4 139.25 71.25 160 61 L 164 59.4Q 169 57.5 174 56.25 190 52.25 200 56 204 57.5 212.65 60.65 220.35 63.8 226.75 67.9 244.1 78.95 261 103" begin="0s" dur="5s" rotate="auto-reverse" fill="freeze"/> <image href="./image/train.png" height="40" width="40"/> </g> <path stroke="#333333" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" fill="none" d="M 30 141 Q 59.35 116.65 112.6 86.4 139.25 71.25 160 61 L 164 59.4Q 169 57.5 174 56.25 190 52.25 200 56 204 57.5 212.65 60.65 220.35 63.8 226.75 67.9 244.1 78.95 261 103"/> <text font-family="幼圆" font-size="12" y="160" x="25" opacity="0">武汉 <animate attributeName="opacity" from="0" to="1" begin="0s" dur="2s" fill="freeze"/> </text> <text font-family="幼圆" font-size="12" y="80" x="165" opacity="0">合肥 <animate attributeName="opacity" from="0" to="1" begin="2s" dur="1.5s" fill="freeze"/> </text> <text font-family="幼圆" font-size="12" y="125" x="260" opacity="0">上海 <animate attributeName="opacity" from="0" to="1" begin="3.5s" dur="1.5s" fill="freeze"/></text></svg>')
+                $(".page2-bg>.center-obj").prepend('<svg class="page2-svg" xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="none" x="0px" y="0px" width="320px" height="200px" viewBox="0 0 320 200"> <g> <animateMotion path="M 30 141 Q 59.35 116.65 112.6 86.4 139.25 71.25 160 61 L 164 59.4Q 169 57.5 174 56.25 190 52.25 200 56 204 57.5 212.65 60.65 220.35 63.8 226.75 67.9 244.1 78.95 261 103" begin="0s" dur="5s" rotate="auto-reverse" fill="freeze"/> <image href="./image/train.png" height="40" width="40"/> </g> <path stroke="#ffffff" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" fill="none" d="M 30 141 Q 59.35 116.65 112.6 86.4 139.25 71.25 160 61 L 164 59.4Q 169 57.5 174 56.25 190 52.25 200 56 204 57.5 212.65 60.65 220.35 63.8 226.75 67.9 244.1 78.95 261 103"/> <text font-family="幼圆" font-size="12" fill="#fff" y="160" x="25" opacity="0">孝感 <animate attributeName="opacity" from="0" to="1" begin="0s" dur="2s" fill="freeze"/> </text> <text font-family="幼圆" font-size="12" fill="#fff" y="80" x="165" opacity="0">合肥 <animate attributeName="opacity" from="0" to="1" begin="2s" dur="1.5s" fill="freeze"/> </text> <text font-family="幼圆" font-size="12" fill="#fff" y="125" x="260" opacity="0">上海 <animate attributeName="opacity" from="0" to="1" begin="3.5s" dur="1.5s" fill="freeze"/></text></svg>')
                 var date = new Date();
                 var month = date.getMonth()>=9?date.getMonth()+1:"0"+(date.getMonth()+1);
                 //$(".page2-month").text(month);
@@ -132,12 +132,14 @@
             <div class="center-obj">
                 <div class="page2-context">
                 </div>
+                <img src="./image/heart-1.png" class="page-2-heart-1" alt=""/>
+                <img src="./image/heart-4.png" class="page-2-heart-2" alt=""/>
             </div>
         </div>
         <div class="bottom-icon fadeInUp animated infinite"></div>
     </div>
     <div class="section" id="section3">
-        <div class="section-bg page3-bg">
+        <div class="section-bg">
             <div class="center-obj">
                 <div class="page3-left-word">
                     <div>看</div>
@@ -159,25 +161,29 @@
     </div>
     <div class="section" id="section4">
         <div class="section-bg page4-bg" >
-            <div class="center-obj" >
-
-            </div>
+            <!--<div class="center-obj" >-->
+                <img class="page4-up" src="./image/4-up.png"/>
+                <div class="page4-text">xxx</div>
+                <img class="page4-down" src="./image/4-down.png" />
+            <!--</div>-->
         </div>
         <div class="bottom-icon fadeInUp animated infinite"></div>
     </div>
     <div class="section" id="section5">
         <div class="section-bg page5-bg">
-            <div class="center-obj">
-
-            </div>
+            <!--<div class="center-obj">-->
+            <img class="page5-up" src="./image/5-up.png"/>
+            <img class="page5-left" src="./image/5-left.png"/>
+            <img class="page5-right"src="./image/5-right.png"/>
+            <!--</div>-->
         </div>
         <div class="bottom-icon fadeInUp animated infinite"></div>
     </div>
     <div class="section" id="section7">
         <div class="section-bg page6-bg">
-            <div class="center-obj">
+            <!--<div class="center-obj">-->
 
-            </div>
+            <!--</div>-->
         </div>
         <div class="bottom-icon fadeInUp animated infinite"></div>
     </div>
