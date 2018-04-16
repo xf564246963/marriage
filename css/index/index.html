@@ -56,6 +56,10 @@
                 normalScrollElements: '.scrollable-element',
                 onLeave:function (index,nextIndex,direction) {
                     pageManage[nextIndex-1]&&pageManage[nextIndex-1]();
+                    if(nextIndex-1!=6){
+                        document.querySelector(".leaf-scene").style.display = "none";
+                        pageManage.pageData[nextIndex-1]&&cancelAnimationFrame(pageManage.pageData[nextIndex-1].interval);
+                    }
                 },
                 afterRender: function() {
                 },
@@ -66,12 +70,41 @@
             //滚动子元素不影响父元素
             $('.scrollable-element').scrollUnique();
 
+            LEAFS.init();
+            var imageObject = {};
+            imageObject.imageObject = new Image;
+            imageObject.imageObject.src = "./image/7-bg.png";
+            imageObject.imageObject.onload = function(){
+                imageObject.imgClipData = {};
+                imgResponseAsBg(imageObject);
+                imageObject.imgClipData.x = -parseInt(imageObject.imgClipData.width*3/4 - window.innerWidth*3/4);
+                $(".page7-bg").css("background","url(" + imageObject.imageObject.src + ") no-repeat "
+                        + imageObject.imgClipData.x + "px " + imageObject.imgClipData.y + "px/"
+                        + imageObject.imgClipData.width + "px " + imageObject.imgClipData.height + "px")
+            }
+
         });
 
-        var pageManage = {
-            "0":function(){
+        function imgResponseAsBg(imageObject) {
+            if (Object.prototype.toString.call(imageObject) === "[object Object]") {
+                var img = imageObject.imageObject;
+                imageObject.imgClipData = {};
+                //canvas background 自适应
+                if (img.width / img.height >= window.innerWidth / window.innerHeight) {
+                   imageObject.imgClipData.width = parseInt(window.innerHeight * img.width / img.height);
+                   imageObject.imgClipData.height = window.innerHeight;
+                   imageObject.imgClipData.x = -(imageObject.imgClipData.width - window.innerWidth) / 2;
+                   imageObject.imgClipData.y = 0;
+                } else {
+                   imageObject.imgClipData.width = window.innerWidth;
+                   imageObject.imgClipData.height = parseInt(window.innerWidth * img.height / img.width);
+                   imageObject.imgClipData.x = 0;
+                   imageObject.imgClipData.y = -(imageObject.imgClipData.height - window.innerHeight) / 2;
+                }
+            }
+        }
 
-            },
+        var pageManage = {
             "1":function(){
                 if($(".page2-bg>.center-obj>svg")){
                     $(".page2-bg>.center-obj>svg").remove();
@@ -103,8 +136,18 @@
                     }
                 }.bind(this),250);
             },
+            "6": function () {
+                document.querySelector(".leaf-scene").style.display = "block";
+                !function leafAnimate(){
+                    LEAFS.render();
+                    this.pageData.interval = requestAnimationFrame(leafAnimate.bind(this));
+                }.apply(this);
+            },
             pageData:{
                 "1":{
+                    interval:null
+                },
+                "6":{
                     interval:null
                 }
             }
@@ -179,35 +222,38 @@
         </div>
         <div class="bottom-icon fadeInUp animated infinite"></div>
     </div>
-    <div class="section" id="section7">
+    <div class="section" id="section6">
         <div class="section-bg page6-bg">
             <!--<div class="center-obj">-->
-
+            <img class="page6-up" src="./image/6-up.png"/>
+            <img class="page6-right"src="./image/6-right.png"/>
+            <!--</div>-->
+        </div>
+        <div class="bottom-icon fadeInUp animated infinite"></div>
+    </div>
+    <div class="section" id="section7">
+        <div class="section-bg page7-bg">
+            <!--<div class="center-obj">-->
+                <div class="falling-leaves"></div>
             <!--</div>-->
         </div>
         <div class="bottom-icon fadeInUp animated infinite"></div>
     </div>
     <div class="section" id="section8">
-        <div class="section-bg page7-bg">
+        <div class="section-bg">
             <div class="center-obj">
 
             </div>
         </div>
-        <div class="bottom-icon fadeInUp animated infinite"></div>
     </div>
-    <div class="section" id="section11">
+    <div class="section" id="section9">
         <div class="section-bg">
             <div class="center-obj">
-                <div class="end-big-text1 animated"></div>
-                <div class="end-text1 animated"></div>
-                <div class="end-line animated"></div>
-                <div class="end-text2 animated"></div>
-                <div class="end-text3 animated"></div>
-                <div class="end-text4 animated"></div>
-                <div class="end-text5 animated"></div>
+
             </div>
         </div>
     </div>
 </div>
+<script src="./js/leaf.js"></script>
 </body>
 </html>
