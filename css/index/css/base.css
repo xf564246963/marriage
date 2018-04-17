@@ -9,6 +9,15 @@ body{
     font-family: "weddingFont","Ó×Ô²", "·ÂËÎ", "Helvetica Rounded", Arial, sans-serif;
 }
 
+
+.center{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate3d(-50%,-50%,0);
+    transform: translate3d(-50%,-50%,0);
+}
+
 .section-bg{
     z-index: 2;
     background: url("../image/2.png") no-repeat center center;
@@ -331,9 +340,20 @@ body{
     margin:0 2%;
 }
 
-.page9-location{
+div.page9-location{
     width: 70%;
     height: 55%;
+    top: 30%;
+}
+
+div.page9-time{
+    top: 70%;
+    width: 100%;
+}
+
+div.page9-address{
+    top: 80%;
+    width: 100%;
 }
 
 .falling-leaves {
@@ -365,14 +385,6 @@ body{
     transform-style: preserve-3d;
     -webkit-backface-visibility: visible;
     backface-visibility: visible;
-}
-
-.center{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate3d(-50%,-50%,0);
-    transform: translate3d(-50%,-50%,0);
 }
 
 .center-obj {

@@ -13,7 +13,7 @@
 
     <script type="text/javascript" src="../js/jquery.fullPage.js"></script>
 
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=8BB7F0E5C9C77BD6B9B655DB928B74B6E2D838FD"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=HCzmc4huncRYgCQphQgg22eBG1HNct4G"></script>
 
     <script type="text/javascript">
 
@@ -40,7 +40,7 @@
             imageObject.imageObject.onload = function(){
                 imageObject.imgClipData = {};
                 imgResponseAsBg(imageObject);
-                imageObject.imgClipData.x = -parseInt(imageObject.imgClipData.width*3/4 - window.innerWidth*3/4);
+                imageObject.imgClipData.x = -parseInt(imageObject.imgClipData.width*6/7 - window.innerWidth*6/7);
                 $(".page7-bg").css("background","url(" + imageObject.imageObject.src + ") no-repeat "
                         + imageObject.imgClipData.x + "px " + imageObject.imgClipData.y + "px/"
                         + imageObject.imgClipData.width + "px " + imageObject.imgClipData.height + "px")
@@ -226,12 +226,13 @@
         <div class="section-bg">
             <div class="center-obj">
                 <div class="center page9-location" id="location"></div>
+                <div class="center align-center page9-time">2018.05.20</div>
+                <div class="center align-center page9-address">汉川市金华天商务酒店</div>
             </div>
         </div>
     </div>
 </div>
-<audio src="./audio/ifYouBecomeWind.mp3" autoplay="autoplay" loop="loop">
-</audio>
+<!--<audio src="./audio/ifYouBecomeWind.mp3" autoplay="autoplay" loop="loop"></audio>-->
 <script src="./js/leaf.js"></script>
 <script>
     // 百度地图API功能
